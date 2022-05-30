@@ -44,7 +44,7 @@ export default function Metamask() {
       });
       web3.address.current = accounts[0];
       setAccountAddress(accounts[0]);
-
+      web3.connected.current = true;
       chainId.current = await (
         await web3.provider.current.getNetwork()
       ).chainId;
@@ -54,6 +54,15 @@ export default function Metamask() {
     }
   }
 
+  function disconnect(){
+    if(web3.web3Enable.current && web3.connected.current)
+    {
+        web3.connected.current = false;
+        web3.address.current = '';
+        setAccountAddress(null);
+        handleClose();
+    }
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -65,10 +74,10 @@ export default function Metamask() {
   return (
     <div>
       <Button
-        size="large"
+       
         variant="contained"
-        className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
-        startIcon={<AccountBalanceWalletIcon></AccountBalanceWalletIcon>}
+        className="bg-cyan-300 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
+        startIcon={<AccountBalanceWalletIcon ></AccountBalanceWalletIcon>}
         onClick={accountAddress ? handleClickOpen : Connect}
       >
         {accountAddress
@@ -110,7 +119,7 @@ export default function Metamask() {
               size="large"
               variant="contained"
               className="bg-cyan-400 w-full hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
-              onClick={handleClose}
+              onClick={disconnect}
             >
               Disconnect
             </Button>
