@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useEffect, useContext } from "react";
 import Button from "@mui/material/Button";
 import {
@@ -15,51 +15,59 @@ import web3Context from "../Context/web3Context";
 import { ReactComponent as MetamaskSvg } from "../images/metamask.svg";
 import { getExplorer } from "../helper/getExplorer";
 
-export default function Metamask() {
+export default function Metamask({size,text}) {
   const web3 = useContext(web3Context);
   const [open, setOpen] = React.useState(false);
-  const [accountAddress, setAccountAddress] = useState();
+
   const chainId = useRef("");
-  const explorer = useRef("");
 
   useEffect(() => {
     function init() {
       if (window.ethereum) {
-        web3.web3Enable.current = true;
-        web3.provider.current = new ethers.providers.Web3Provider(
+        web3.ref_web3Enable.current = true;
+        web3.setWeb3Enable(true);
+        web3.ref_provider.current = new ethers.providers.Web3Provider(
           window.ethereum
         );
+        web3.setProvider( web3.ref_provider.current);
       } else {
-        web3.web3Enable.current = false;
-        web3.provider.current = null;
+        web3.ref_web3Enable.current = false;
+        web3.setWeb3Enable(false);
+
+        web3.ref_provider.current = null;
+        web3.setProvider(null);
       }
     }
     init();
-  }, [web3.web3Enable, web3.provider]);
+    // eslint-disable-next-line
+  }, []);
+
 
   async function Connect() {
-    if (web3.web3Enable.current) {
+    if (web3.ref_web3Enable.current) {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      web3.address.current = accounts[0];
-      setAccountAddress(accounts[0]);
-      web3.connected.current = true;
+      web3.ref_address.current = accounts[0];
+      web3.setAddress(accounts[0]);
+      web3.ref_connected.current = true;
+      web3.setConnected(true);
       chainId.current = await (
-        await web3.provider.current.getNetwork()
+        await web3.ref_provider.current.getNetwork()
       ).chainId;
-      explorer.current = getExplorer("0x" + chainId.current.toString(16));
+     web3.ref_explorer.current = getExplorer("0x" + chainId.current.toString(16));
     } else {
       handleClickOpen();
     }
   }
 
   function disconnect(){
-    if(web3.web3Enable.current && web3.connected.current)
+    if(web3.ref_web3Enable.current && web3.ref_connected.current)
     {
-        web3.connected.current = false;
-        web3.address.current = '';
-        setAccountAddress(null);
+        web3.ref_connected.current = false;
+        web3.setConnected(false);
+        web3.ref_address.current = '';
+        web3.setAddress('');
         handleClose();
     }
   }
@@ -74,20 +82,20 @@ export default function Metamask() {
   return (
     <div>
       <Button
-       
+        size={size}
         variant="contained"
         className="bg-cyan-300 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
         startIcon={<AccountBalanceWalletIcon ></AccountBalanceWalletIcon>}
-        onClick={accountAddress ? handleClickOpen : Connect}
+        onClick={web3.state_address ? handleClickOpen : Connect}
       >
-        {accountAddress
-          ? accountAddress.substring(0, 5) +
+        {web3.state_address
+          ? web3.state_address.substring(0, 5) +
             "..." +
-            accountAddress.substring(38)
-          : "Metamask"}
+            web3.state_address.substring(38)
+          : text}
       </Button>
 
-      {web3.web3Enable.current && (
+      {web3.state_web3Enable && (
         <Dialog
           open={open}
           onClose={handleClose}
@@ -99,10 +107,10 @@ export default function Metamask() {
           <DialogContent>
             <Card variant="outlined" className="p-5 rounded-lg">
               <span className="text-gray-500 font-Cairos">
-                {accountAddress}
+                {web3.state_address}
               </span>
               <a
-                href={explorer.current + "/address/" + accountAddress}
+                href={web3.ref_explorer.current + "/address/" + web3.state_address}
                 target="_blank"
                 rel="noreferrer"
                 className="no-underline"
@@ -127,7 +135,7 @@ export default function Metamask() {
         </Dialog>
       )}
 
-      {!web3.web3Enable.current && (
+      {!web3.state_web3Enable && (
         <Dialog
           open={open}
           onClose={handleClose}

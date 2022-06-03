@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import Paper from "@mui/material/Paper";
 import Metamask from "./Metamask";
-import { Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { Drawer, List, ListItem, ListItemButton } from "@mui/material";
 export default function Header() {
 
 
@@ -83,7 +83,7 @@ export default function Header() {
               Contact us
             </Link>
           </div>
-          <Metamask></Metamask>
+          <Metamask size='medium' text='Metamask'></Metamask>
         </div>
       </div>
     </Paper>
