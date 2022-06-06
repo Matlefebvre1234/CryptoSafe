@@ -42,8 +42,29 @@ export default function Metamask({size,text}) {
     // eslint-disable-next-line
   }, []);
 
+  async function askPubKey()
+  {
+   await window.ethereum
+    .request({
+      method: 'eth_getEncryptionPublicKey',
+      params: [ web3.ref_address.current], // you must have access to the specified account
+    })
+    .then((result) => {
+      web3.ref_encryptionPubKey.current = result;
+    })
+    .catch((error) => {
+      if (error.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        console.log("We can't encrypt anything without the key.");
+      } else {
+        console.error(error);
+      }
+    });
+
+  }
 
   async function Connect() {
+
     if (web3.ref_web3Enable.current) {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -56,6 +77,7 @@ export default function Metamask({size,text}) {
         await web3.ref_provider.current.getNetwork()
       ).chainId;
      web3.ref_explorer.current = getExplorer("0x" + chainId.current.toString(16));
+     askPubKey();
     } else {
       handleClickOpen();
     }

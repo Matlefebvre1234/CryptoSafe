@@ -35,7 +35,7 @@
 		],
 		"name": "addPassword",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -128,7 +128,7 @@
 		"name": "masterContract",
 		"outputs": [
 			{
-				"internalType": "address",
+				"internalType": "address payable",
 				"name": "",
 				"type": "address"
 			}
@@ -165,7 +165,7 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
+				"internalType": "address payable",
 				"name": "_address",
 				"type": "address"
 			}

@@ -12,12 +12,23 @@ export default function PasswordManager({state_account,setAccount}) {
     const [listPassword, setListPassword] = useState();
     const [loading, setLoading] = useState (true);
 
-   async function fetchPassword()
+   const fetchPassword = async () =>
     {
         const contract = new Contract(state_account,abi,web3.ref_provider.current.getSigner());
-        setListPassword(await contract.getlistPassword());
+        const arr = await contract.getlistPassword();
+        console.log(arr);
+        setListPassword(arr.filter(e => Number(e.id) !== 0 ));
         setLoading(false);
     }
+
+    const deletePassword = async (id) =>
+    {
+      const contract = new Contract(state_account,abi,web3.ref_provider.current.getSigner());
+      const tx = await contract.deletePassword(id);
+      await tx.wait();
+      fetchPassword();
+    }
+
 
     useEffect(()=>{
       fetchPassword();
@@ -55,11 +66,11 @@ export default function PasswordManager({state_account,setAccount}) {
         </div>
 
         <div className=' pt-3 lg:p-5 flex w-full justify-center lg:justify-start'>
-        <NewPasswordButton></NewPasswordButton>
+        <NewPasswordButton callback={fetchPassword} account={state_account}></NewPasswordButton>
         </div>
         <div className='flex flex-col lg:flex-row justify-center w-full items-center flex-wrap my-10'>
         {loading && <CircularProgress></CircularProgress>}
-        {!loading && listPassword && listPassword.map(password => <PasswordCard password={password}></PasswordCard> )}
+        {!loading && listPassword && listPassword.map(password => <PasswordCard password={password} deletePassword={deletePassword}></PasswordCard> )}
      
         </div>
       </Card>

@@ -11,6 +11,7 @@ function App() {
   const ref_web3Enable = useRef();
   const ref_provider = useRef();
   const ref_explorer = useRef();
+  const ref_encryptionPubKey = useRef();
 
   const [state_address,setAddress] = useState();
   const [state_connected,setConnected] = useState();
@@ -23,7 +24,7 @@ function App() {
     ref_web3Enable: ref_web3Enable,
     ref_provider: ref_provider,
     ref_explorer:ref_explorer,
-    
+    ref_encryptionPubKey: ref_encryptionPubKey,
     state_address: state_address,
     state_connected: state_connected,
     state_web3Enable: state_web3Enable,
