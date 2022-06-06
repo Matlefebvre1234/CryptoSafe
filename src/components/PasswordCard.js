@@ -1,35 +1,46 @@
 import React, { useState } from "react";
-import { Button, Card } from "@mui/material";
+import { Button, Card, CardContent } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import EditIcon from "@mui/icons-material/Edit";
+
 export default function PasswordCard({ password }) {
   const [visibility, setVisibility] = useState(false);
   return (
-    <Card variant="outlined" className="p-5 rounded-2xl">
-      <div className="flex flex-col justify-center items-center">
-        <span className="font-Cairo text-black text-lg">{password.name}</span>
-        <div className="flex justify-center items-center">
-          <span className="font-Cairo text-black">
-            {visibility ? password.password : "********"}
-          </span>
-
-          <Button
-            size="small"
-            variant="contained"
-            className="bg-sky-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
-            startIcon={
-              visibility ? (
-                <VisibilityOffIcon></VisibilityOffIcon>
+    <Card variant="outlined" className=" rounded-2xl flex items-end w-44 lg:mx-3 my-3 ">
+      <CardContent className="px-5 pt-5 mb-1 rounded-2xl flex flex-col w-full">
+        <span className="font-Concert text-blue-400  text-center text-lg mb-3">
+          {password.name}
+        </span>
+        <div className="flex justify-center items-center w-full px-1">
+          <div className="flex items-center mt-3 w-3/5">
+            <span className="font-Cairotext-black">
+              {visibility ? password.password : "********"}
+            </span>
+          </div>
+          <div className="flex justify-center items-center mb-1 w-2/5 ">
+            <div
+              onClick={() => setVisibility((prev) => !prev)}
+              className=" bg-sky-400 w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+            >
+              {visibility ? (
+                <VisibilityOffIcon className="text-lg"></VisibilityOffIcon>
               ) : (
-                <VisibilityIcon></VisibilityIcon>
-              )
-            }
-            onClick={() => {
-              setVisibility((prev) => !prev);
-            }}
-          ></Button>
+                <VisibilityIcon className="text-lg"></VisibilityIcon>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+
+        <Button
+          size="small"
+          variant="contained"
+          className="bg-sky-400 hover:bg-blue-500 mt-2 font-Concert hover:transform hover:scale-105 font-Cairos text-xs w-full h-6"
+          startIcon={<EditIcon></EditIcon>}
+        >
+          Edit
+        </Button>
+      </CardContent>
     </Card>
   );
 }

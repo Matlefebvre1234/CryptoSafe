@@ -5,6 +5,7 @@ import abi from "../abi/Account.json"
 import { Button, CircularProgress, Card} from '@mui/material';
 import ExploreIcon from '@mui/icons-material/Explore';
 import PasswordCard from './PasswordCard';
+import NewPasswordButton from './NewPasswordButton';
 export default function PasswordManager({state_account,setAccount}) {
 
     const web3 = useContext(web3Context);
@@ -27,16 +28,16 @@ export default function PasswordManager({state_account,setAccount}) {
       <Card variant="outlined" className='p-5'>
       <div className='w-full'>
 
-        <Card className='p-5 flex justify-center items-center bg-neutral-100 ' >
-        <span className='font-Concert text-black text-sm'> Your Contract Account :  </span>
-           <span className='font-Cairo mx-2 text-black tx-sm'>{state_account}</span> 
+        <Card className='p-5 flex lg:flex-row flex-col justify-center items-center bg-neutral-100 ' >
+        <span className='font-Concert text-black text-xs lg:text-sm mx-2 my-2'> Your Contract Account :  </span>
+           <span className='font-Cairo lg:mx-2 lg:my-0 my-2 text-black text-sm lg:text-sm'>{state_account}</span> 
 
 
             <a
                 href={web3.ref_explorer.current + "/address/" + web3.state_address}
                 target="_blank"
                 rel="noreferrer"
-                className="no-underline mx-3 flex justify-center items-center"
+                className="no-underline mx-3 flex justify-center items-center my-2"
               >
                
         <Button
@@ -52,9 +53,13 @@ export default function PasswordManager({state_account,setAccount}) {
         </Card>
          
         </div>
-        <div className='flex justify-center w-full items-center flex-wrap my-10'>
+
+        <div className=' pt-3 lg:p-5 flex w-full justify-center lg:justify-start'>
+        <NewPasswordButton></NewPasswordButton>
+        </div>
+        <div className='flex flex-col lg:flex-row justify-center w-full items-center flex-wrap my-10'>
         {loading && <CircularProgress></CircularProgress>}
-        {!loading && listPassword && listPassword.map(password => <PasswordCard className="m-2" password={password}></PasswordCard> )}
+        {!loading && listPassword && listPassword.map(password => <PasswordCard password={password}></PasswordCard> )}
      
         </div>
       </Card>
