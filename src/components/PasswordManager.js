@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import web3Context from '../Context/web3Context'
 import { Contract } from 'ethers';
 import abi from "../abi/Account.json"
@@ -29,10 +29,8 @@ export default function PasswordManager({state_account,setAccount}) {
       fetchPassword();
     }
 
-
-    useEffect(()=>{
       fetchPassword();
-    },[])
+    
   return (
     <div className='p-5'>
 
@@ -70,7 +68,7 @@ export default function PasswordManager({state_account,setAccount}) {
         </div>
         <div className='flex flex-col lg:flex-row justify-center w-full items-center flex-wrap my-10'>
         {loading && <CircularProgress></CircularProgress>}
-        {!loading && listPassword && listPassword.map(password => <PasswordCard password={password} deletePassword={deletePassword}></PasswordCard> )}
+        {!loading && listPassword && listPassword.map(password => <PasswordCard password={password} deletePassword={deletePassword} account={state_account} callback={fetchPassword}></PasswordCard> )}
      
         </div>
       </Card>

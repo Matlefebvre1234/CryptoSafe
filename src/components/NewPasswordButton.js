@@ -12,15 +12,45 @@ import AddIcon from "@mui/icons-material/Add";
 import web3Context from "../Context/web3Context";
 import { Contract } from "ethers";
 import abi from "../abi/Account.json";
-import { ethers } from "ethers";
-
+import abiMaster from "../abi/Master.json";
+import contractAddress from "../abi/contractAddress";
 export default function NewPasswordButton({ callback, account }) {
   const [open, setOpen] = useState(false);
+  const [errorName,setErrorName] = useState(false);
+  const [errorPassword,setErrorPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const web3 = useContext(web3Context);
 
-  const inputName = useRef();
-  const inputPassword = useRef();
+  const inputName = useRef('');
+  const inputPassword = useRef('');
+
+
+  function validInput()
+  {
+    let valid = true;
+    if(inputName.current === '')
+    {
+      setErrorName(true);
+      valid = false;
+    }else{
+      setErrorName(false);
+    }
+
+    if(inputPassword.current ==='')
+    {
+      setErrorPassword(true);
+      valid  = false;
+    }else{
+      setErrorName(false);
+    }
+
+    if(valid)
+    {
+      createPassword();
+    }
+
+
+  }
 
   async function createPassword() {
     setLoading(true);
@@ -41,11 +71,10 @@ export default function NewPasswordButton({ callback, account }) {
       )
     );
 
-    console.log("encrypt message = ", encryptedMessage.toString());
-
-
+    let contractMaster = new Contract(contractAddress,abiMaster,web3.ref_provider.current.getSigner());
+    const fee = await contractMaster.getFee();
     const override = {
-      value: ethers.utils.parseEther("0.05")
+      value: fee
   };
 
     const contract = new Contract(
@@ -53,8 +82,6 @@ export default function NewPasswordButton({ callback, account }) {
       abi,
       web3.ref_provider.current.getSigner()
     );
-    console.log(inputName.current);
-
     const tx = await contract.addPassword(
       Date.now(),
       inputName.current,
@@ -69,6 +96,7 @@ export default function NewPasswordButton({ callback, account }) {
 
   function handleClose() {
     setOpen(false);
+    setLoading(false);
   }
   return (
     <div>
@@ -100,6 +128,7 @@ export default function NewPasswordButton({ callback, account }) {
         
               <TextField
                 required
+                error={errorName}
                 variant="filled"
                 id="Name"
                 onChange={(e) => {
@@ -114,6 +143,7 @@ export default function NewPasswordButton({ callback, account }) {
               <TextField
                 required
                 size="small"
+                error={errorPassword}
                 onChange={(e) => {
                   inputPassword.current = e.target.value;
                 }}
@@ -128,14 +158,14 @@ export default function NewPasswordButton({ callback, account }) {
           )}
         </DialogContent>
         <DialogActions className="p-5">
-          <Button
+         {!loading && <Button
             size="medium"
             variant="contained"
             className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
-            onClick={createPassword}
+            onClick={validInput}
           >
             create
-          </Button>
+          </Button>}
         </DialogActions>
       </Dialog>
     </div>
