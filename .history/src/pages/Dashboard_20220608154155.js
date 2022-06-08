@@ -18,14 +18,16 @@ export default function Dashboard() {
     {
         if(web3.ref_connected.current)
         {
-            let test = "BlueIceQc1793!";
+            let test = "alwdawdawdalo";
             
-            
-            let hash = ethers.utils.id(test);
-            let result = parseInt(hash,16)  + parseInt(web3.ref_address.current);
-        
-           let stringtonumber = ethers.utils.formatBytes32String(result.toString());
-            let newAdd = new ethers.Wallet(stringtonumber).wallet;
+            let tr = ethers.utils.formatBytes32String(test);
+            console.log(tr)
+            console.log(parseInt(web3.ref_address.current,16))
+            let result = parseInt(web3.ref_address.current,16) + parseInt(tr) ;
+            let result2 = result.toString(16);
+            console.log(web3.ref_address.current);
+            console.log(result)
+            console.log(result2);
             let contract = new Contract(contractAddress,abi,web3.ref_provider.current.getSigner());
             ref_account.current = await contract.getAccount(web3.ref_address.current);
             if(ref_account.current !== ethers.constants.AddressZero) setAccount(ref_account.current);

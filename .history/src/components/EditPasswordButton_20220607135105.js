@@ -16,7 +16,7 @@ export default function EditPasswordButton({ password, account, callback,setDecr
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const inputName = useRef(password.name);
-  const inputPassword = useRef(decrypted);
+  const inputPassword = useRef();
   const web3 = useContext(web3Context);
   const modified = useRef(false);
 
@@ -31,9 +31,6 @@ export default function EditPasswordButton({ password, account, callback,setDecr
             })
 
             setDecrypted(inputPassword.current)
-        }
-        else{
-          inputPassword.current = decrypted;
         }
        
   }
@@ -67,8 +64,7 @@ export default function EditPasswordButton({ password, account, callback,setDecr
       const tx = await contract.updatePassword(
         password.id,
         inputName.current,
-        encryptedMessage.toString(),
-        ""
+        encryptedMessage.toString()
       );
       await tx.wait();
       setLoading(false);

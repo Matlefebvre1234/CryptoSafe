@@ -86,7 +86,6 @@ export default function NewPasswordButton({ callback, account }) {
       Date.now(),
       inputName.current,
       encryptedMessage.toString(),
-      "",
       override
     );
     await tx.wait();

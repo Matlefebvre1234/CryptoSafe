@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import web3Context from '../Context/web3Context'
 import { Contract } from 'ethers';
 import abi from "../abi/Account.json"
@@ -32,10 +32,7 @@ export default function PasswordManager({state_account,setAccount}) {
       fetchPassword();
     }
 
-     useEffect(()=> {
       fetchPassword();
-      // eslint-disable-next-line
-     },[]) 
     
   return (
     <div className='p-5'>
@@ -80,10 +77,9 @@ export default function PasswordManager({state_account,setAccount}) {
         className="bg-sky-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
         startIcon={<SettingsIcon></SettingsIcon>}
       >
-        Settings
-       
+        Setting
+        <Setting open={openSetting} setOpen={setOpenSetting}></Setting>
       </Button>
-      <Setting open={openSetting} setOpen={setOpenSetting}></Setting>
         </div>
         <div className='flex flex-col lg:flex-row justify-center w-full items-center flex-wrap my-10'>
         {loading && <CircularProgress></CircularProgress>}

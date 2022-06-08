@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import web3Context from '../Context/web3Context'
 import { Contract } from 'ethers';
 import abi from "../abi/Account.json"
@@ -32,10 +32,7 @@ export default function PasswordManager({state_account,setAccount}) {
       fetchPassword();
     }
 
-     useEffect(()=> {
       fetchPassword();
-      // eslint-disable-next-line
-     },[]) 
     
   return (
     <div className='p-5'>

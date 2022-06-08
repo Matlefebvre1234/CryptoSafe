@@ -1,0 +1,4 @@
+const contractAddress = "0x306D5f600656f3748F22Be57Be1Ed988910Dd293";
+export default contractAddress;
+
+//ListAccount 0xc690F6f1e95FB3269C8Ed5B86Eb0d6625E24F5b7

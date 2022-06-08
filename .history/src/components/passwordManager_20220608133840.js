@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import web3Context from '../Context/web3Context'
 import { Contract } from 'ethers';
 import abi from "../abi/Account.json"
@@ -6,14 +6,12 @@ import { Button, CircularProgress, Card} from '@mui/material';
 import ExploreIcon from '@mui/icons-material/Explore';
 import PasswordCard from './PasswordCard';
 import NewPasswordButton from './NewPasswordButton';
-import Setting from "../components/Setting/Setting"
-import SettingsIcon from '@mui/icons-material/Settings';
+
 export default function PasswordManager({state_account,setAccount}) {
 
     const web3 = useContext(web3Context);
     const [listPassword, setListPassword] = useState();
     const [loading, setLoading] = useState (true);
-    const [openSetting,setOpenSetting] = useState(false);
 
    const fetchPassword = async () =>
     {
@@ -32,10 +30,7 @@ export default function PasswordManager({state_account,setAccount}) {
       fetchPassword();
     }
 
-     useEffect(()=> {
       fetchPassword();
-      // eslint-disable-next-line
-     },[]) 
     
   return (
     <div className='p-5'>
@@ -71,19 +66,6 @@ export default function PasswordManager({state_account,setAccount}) {
 
         <div className=' pt-3 lg:p-5 flex w-full justify-center lg:justify-start'>
         <NewPasswordButton callback={fetchPassword} account={state_account}></NewPasswordButton>
-        <Button
-        size="large"
-        onClick={() => {
-          setOpenSetting(true);
-        }}
-        variant="contained"
-        className="bg-sky-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
-        startIcon={<SettingsIcon></SettingsIcon>}
-      >
-        Settings
-       
-      </Button>
-      <Setting open={openSetting} setOpen={setOpenSetting}></Setting>
         </div>
         <div className='flex flex-col lg:flex-row justify-center w-full items-center flex-wrap my-10'>
         {loading && <CircularProgress></CircularProgress>}

@@ -7,7 +7,6 @@ import abi from "../abi/Master.json"
 import web3Context from '../Context/web3Context'
 import PasswordManager from '../components/PasswordManager'
 import passwordManagerContext from '../Context/PasswordManagerContext'
-
 export default function Dashboard() {
     
     const web3 = useContext(web3Context);
@@ -18,14 +17,7 @@ export default function Dashboard() {
     {
         if(web3.ref_connected.current)
         {
-            let test = "BlueIceQc1793!";
-            
-            
-            let hash = ethers.utils.id(test);
-            let result = parseInt(hash,16)  + parseInt(web3.ref_address.current);
-        
-           let stringtonumber = ethers.utils.formatBytes32String(result.toString());
-            let newAdd = new ethers.Wallet(stringtonumber).wallet;
+            console.log("fetching")
             let contract = new Contract(contractAddress,abi,web3.ref_provider.current.getSigner());
             ref_account.current = await contract.getAccount(web3.ref_address.current);
             if(ref_account.current !== ethers.constants.AddressZero) setAccount(ref_account.current);

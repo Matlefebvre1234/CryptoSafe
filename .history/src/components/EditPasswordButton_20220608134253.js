@@ -32,9 +32,6 @@ export default function EditPasswordButton({ password, account, callback,setDecr
 
             setDecrypted(inputPassword.current)
         }
-        else{
-          inputPassword.current = decrypted;
-        }
        
   }
 
