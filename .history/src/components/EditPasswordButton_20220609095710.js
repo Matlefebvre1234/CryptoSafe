@@ -12,35 +12,25 @@ import web3Context from "../Context/web3Context";
 import { CircularProgress } from "@mui/material";
 import abi from "../abi/Account.json";
 import { Contract } from "ethers";
-import passwordManagerContext from "../Context/PasswordManagerContext";
-import { decryptWithFakeAddress } from "../helper/encrypt";
 export default function EditPasswordButton({ password, account, callback,setDecrypted ,decrypted}) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const inputName = useRef(password.name);
   const inputPassword = useRef(decrypted);
   const web3 = useContext(web3Context);
-  const passwordContext = useContext(passwordManagerContext);
   const modified = useRef(false);
 
 
   async function decrypt() {
         if(!decrypted)
         {
-          let lastDecryption;
-
             inputPassword.current = await window.ethereum
             .request({
               method: "eth_decrypt",
               params: [password.password, web3.ref_address.current],
             })
-            if(passwordContext.ref_doubleSecurity.current)
-            {
-              lastDecryption = await decryptWithFakeAddress(web3.ref_address.current,passwordContext.ref_doubleSecurity.current,inputPassword.current);
-            }else{
-              lastDecryption = inputPassword.current;
-            }
-            setDecrypted(lastDecryption);
+
+            setDecrypted(inputPassword.current)
         }
         else{
           inputPassword.current = decrypted;

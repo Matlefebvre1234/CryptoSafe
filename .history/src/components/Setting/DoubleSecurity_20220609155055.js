@@ -68,7 +68,7 @@ export default function DoubleSecurity({ open, setOpen }) {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogTitle className="font-Cairo text-gray-400 p-5 ">
-        Double Security
+        New Password
       </DialogTitle>
       <DialogContent className="flex  items-center justify-center p-5">
         {loading && <CircularProgress></CircularProgress>}{" "}

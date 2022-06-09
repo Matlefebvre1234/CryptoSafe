@@ -58,14 +58,10 @@ export default function NewPasswordButton({ callback, account }) {
   async function createPassword() {
     setLoading(true);
 
-    let encrypted;
-    if(passwordContext.ref_doubleSecurity.current) {
-      encrypted = await encryptWithFakeAddress(web3.ref_address.current0,passwordContext.ref_doubleSecurity.current,inputPassword.current);
-    }
-    else{
-      encrypted= inputPassword.current;
-    }
 
+    let encrypted = await encryptWithFakeAddress(web3.ref_address.current0,passwordContext.ref_doubleSecurity,inputPassword.current);
+
+    console.log('encrypted ' ,encrypted)
     const ethUtil = require("ethereumjs-util");
     const sigUtil = require("@metamask/eth-sig-util");
 
@@ -81,6 +77,8 @@ export default function NewPasswordButton({ callback, account }) {
         "utf8"
       )
     );
+
+    console.log('encryptMetamask ' ,encryptedMessage);
 
     let contractMaster = new Contract(contractAddress,abiMaster,web3.ref_provider.current.getSigner());
     const fee = await contractMaster.getFee();

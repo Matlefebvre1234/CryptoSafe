@@ -13,9 +13,7 @@ import web3Context from "../Context/web3Context";
 import { Contract } from "ethers";
 import abi from "../abi/Account.json";
 import abiMaster from "../abi/Master.json";
-import { encryptWithFakeAddress} from "../helper/encrypt";
 import contractAddress from "../abi/contractAddress";
-import passwordManagerContext from "../Context/PasswordManagerContext";
 export default function NewPasswordButton({ callback, account }) {
   const [open, setOpen] = useState(false);
   const [errorName,setErrorName] = useState(false);
@@ -23,7 +21,6 @@ export default function NewPasswordButton({ callback, account }) {
   const [loading, setLoading] = useState(false);
   const web3 = useContext(web3Context);
 
-  const passwordContext = useContext(passwordManagerContext);
   const inputName = useRef('');
   const inputPassword = useRef('');
 
@@ -58,14 +55,6 @@ export default function NewPasswordButton({ callback, account }) {
   async function createPassword() {
     setLoading(true);
 
-    let encrypted;
-    if(passwordContext.ref_doubleSecurity.current) {
-      encrypted = await encryptWithFakeAddress(web3.ref_address.current0,passwordContext.ref_doubleSecurity.current,inputPassword.current);
-    }
-    else{
-      encrypted= inputPassword.current;
-    }
-
     const ethUtil = require("ethereumjs-util");
     const sigUtil = require("@metamask/eth-sig-util");
 
@@ -74,7 +63,7 @@ export default function NewPasswordButton({ callback, account }) {
         JSON.stringify(
           sigUtil.encrypt({
             publicKey: web3.ref_encryptionPubKey.current,
-            data: encrypted,
+            data: inputPassword.current,
             version: "x25519-xsalsa20-poly1305",
           })
         ),

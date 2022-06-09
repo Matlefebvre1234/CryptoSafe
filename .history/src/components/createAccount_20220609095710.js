@@ -10,13 +10,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 export default function CreateAccount({ callback }) {
   const web3 = useContext(web3Context);
   const [loading, setLoading] = useState(false);
-
   async function createAccount() {
     let signer = web3.ref_provider.current.getSigner();
     let contract = new Contract(contractAddress, abi, signer);
     setLoading(true);
     const tx = await contract.createAccount(web3.ref_address.current,false);
-    await tx.wait();
+    let receipt = await tx.wait();
+    console.log(receipt);
     setLoading(false);
     callback();
   }

@@ -6,10 +6,8 @@ import web3Context from "../Context/web3Context";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditPasswordButton from "./EditPasswordButton";
 import { decryptWithFakeAddress } from "../helper/encrypt";
-import passwordManagerContext from "../Context/PasswordManagerContext";
 export default function PasswordCard({ password, deletePassword,account,callback }) {
   const web3 = useContext(web3Context);
-  const passwordContext = useContext(passwordManagerContext)
   const [decrypted, setDecrypted] = useState();
 
   function decrypt() {
@@ -20,16 +18,11 @@ export default function PasswordCard({ password, deletePassword,account,callback
           method: "eth_decrypt",
           params: [password.password, web3.ref_address.current],
         })
-        .then(async(decryptedMessage) => {
+        .then((decryptedMessage) => {
 
-          let lastDecryption
-          if(passwordContext.ref_doubleSecurity.current) {
-             lastDecryption = await decryptWithFakeAddress(web3.ref_address.current,passwordContext.ref_doubleSecurity.current,decryptedMessage);
-          }
-          else{
-            lastDecryption = decryptedMessage;
-          }
-
+          console.log('decryptedMEssage', decryptedMessage);
+          let lastDecryption = decryptWithFakeAddress(web3.ref_address.current,"doublesecurity",decryptedMessage);
+          console.log('lastDecryption', lastDecryption);
           setDecrypted(lastDecryption);
         })
         .catch((error) => console.log(error.message));

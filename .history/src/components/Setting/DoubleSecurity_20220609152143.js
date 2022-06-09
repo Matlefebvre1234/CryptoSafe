@@ -50,14 +50,13 @@ export default function DoubleSecurity({ open, setOpen }) {
 
 
     const contract = new Contract(
-      passwordManager.ref_account.current,
+      passwordManager.ref_account,
       abi,
       web3.ref_provider.current.getSigner()
     );
-    const tx = await contract.setHashDoubleSecurity(doublesecurity);
+    const tx = contract.setHashDoubleSecurity(doublesecurity);
     await tx.wait();
-    passwordManager.ref_doubleSecurity.current = inputPassword.current;
-    setCreated(true);
+    passwordManager.ref_doubleSecurity = doublesecurity;
     setLoading(false);
   }
 
@@ -68,7 +67,7 @@ export default function DoubleSecurity({ open, setOpen }) {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogTitle className="font-Cairo text-gray-400 p-5 ">
-        Double Security
+        New Password
       </DialogTitle>
       <DialogContent className="flex  items-center justify-center p-5">
         {loading && <CircularProgress></CircularProgress>}{" "}
@@ -93,12 +92,12 @@ export default function DoubleSecurity({ open, setOpen }) {
 
         {!loading && created && 
         <div className="flex flex-col justify-center items-center">
-            <CheckCircleIcon className="text-6xl text-green-400"></CheckCircleIcon>
-            <span className="font-Cairo text-black mt-10">Password set successfully !</span>
+            <CheckCircleIcon className="text-3xl"></CheckCircleIcon>
+            <span className="font-Cairo text-black">Password set successfully !</span>
             </div>}
       </DialogContent>
       <DialogActions className="p-5">
-        {!loading && !created && (
+        {!loading && (
           <Button
             size="medium"
             variant="contained"
