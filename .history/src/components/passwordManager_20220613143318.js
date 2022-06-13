@@ -8,18 +8,17 @@ import PasswordCard from "./PasswordCard";
 import NewPasswordButton from "./NewPasswordButton";
 import Setting from "../components/Setting/Setting";
 import SettingsIcon from "@mui/icons-material/Settings";
+import passwordManagerContext from "../Context/PasswordManagerContext";
 export default function PasswordManager({ state_account, setAccount }) {
   const web3 = useContext(web3Context);
+  const passwordContext = useContext(passwordManagerContext);
   const [listPassword, setListPassword] = useState();
   const [loading, setLoading] = useState(true);
   const [openSetting, setOpenSetting] = useState(false);
+
   const fetchPassword = async () => {
-    const contract = new Contract(
-      state_account,
-      abi,
-      web3.ref_provider.current.getSigner()
-    );
-    const arr = await contract.getlistPassword();
+    
+    const arr = await fetchPassword();
     setListPassword(arr.filter((e) => Number(e.id) !== 0));
     setLoading(false);
   };
@@ -90,7 +89,7 @@ export default function PasswordManager({ state_account, setAccount }) {
             >
               Settings
             </Button>
-            <Setting open={openSetting} setOpen={setOpenSetting} fetchPassword = {fetchPassword}></Setting>
+            <Setting open={openSetting} setOpen={setOpenSetting}></Setting>
           </div>
         )}
         <div className="flex flex-col lg:flex-row justify-center w-full items-center flex-wrap my-10">

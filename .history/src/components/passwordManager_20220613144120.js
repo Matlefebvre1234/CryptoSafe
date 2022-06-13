@@ -90,7 +90,7 @@ export default function PasswordManager({ state_account, setAccount }) {
             >
               Settings
             </Button>
-            <Setting open={openSetting} setOpen={setOpenSetting} fetchPassword = {fetchPassword}></Setting>
+            <Setting open={openSetting} setOpen={setOpenSetting}></Setting>
           </div>
         )}
         <div className="flex flex-col lg:flex-row justify-center w-full items-center flex-wrap my-10">

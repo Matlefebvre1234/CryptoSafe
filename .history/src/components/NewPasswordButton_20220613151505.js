@@ -59,8 +59,9 @@ export default function NewPasswordButton({ callback, account }) {
     setLoading(true);
 
     let encrypted;
-
+    console.log("encrypt", passwordContext.ref_doubleSecurity.current);
     if(passwordContext.ref_doubleSecurity.current) {
+      console.log("encryptedd++")
       encrypted = await encryptWithFakeAddress(web3.ref_address.current,passwordContext.ref_doubleSecurity.current,inputPassword.current);
     }
     else{

@@ -9,10 +9,12 @@ import {
   Button,
 } from "@mui/material";
 import web3Context from "../../Context/web3Context";
+import { Contract, ethers } from "ethers";
+import abi from "../../abi/Account.json";
 import passwordManagerContext from "../../Context/PasswordManagerContext";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { resetAccount } from "../../helper/resetAccount";
-export default function DoubleSecurity({ open, setOpen, fetchPassword}) {
+export default function DoubleSecurity({ open, setOpen }) {
   const [loading, setLoading] = useState();
   const [created, setCreated] = useState(false);
   const inputPassword = useRef();
@@ -45,7 +47,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword}) {
 
     await resetAccount(web3,passwordManager,inputPassword.current);
     passwordManager.ref_doubleSecurity.current = inputPassword.current;
-    fetchPassword();
+    
     setCreated(true);
     setLoading(false);
   }

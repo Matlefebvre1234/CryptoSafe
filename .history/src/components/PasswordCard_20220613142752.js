@@ -23,8 +23,10 @@ export default function PasswordCard({ password, deletePassword,account,callback
         .then(async(decryptedMessage) => {
 
           let lastDecryption
-          console.log(decryptedMessage);
+          console.log("decrypt")
+          console.log(passwordContext.ref_doubleSecurity.current);
           if(passwordContext.ref_doubleSecurity.current) {
+            console.log("dencryptedd++")
              lastDecryption = await decryptWithFakeAddress(web3.ref_address.current,passwordContext.ref_doubleSecurity.current,decryptedMessage);
           }
           else{

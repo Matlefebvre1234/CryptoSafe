@@ -39,12 +39,13 @@ export default function Dashboard() {
 
     async function fetchDoubleSecurity()
     {
+        console.log(ref_account.current)
         if(ref_account.current)
         {
             let contract = new Contract(ref_account.current,abiAccount,web3.ref_provider.current.getSigner());
             const hash =  await contract.getHashDoubleSecurity();
               setHashDoubleSecurity(hash);
-
+             console.log(hash)
         }
             
         
@@ -68,10 +69,8 @@ export default function Dashboard() {
           <passwordManagerContext.Provider value={contextPackage}>
           <Header></Header>
 
-        {state_account && hashDoubleSecurity && !ref_doubleSecurity.current && <DoubleSecurityInput hashDoubleSecurity={hashDoubleSecurity} setHashDoubleSecurity={setHashDoubleSecurity} ></DoubleSecurityInput>}
-
-        { state_account && !hashDoubleSecurity && <PasswordManager state_account={state_account} setAccount={setAccount}></PasswordManager>}
-       {!state_account && <CreateAccount callback={fetchaccount}></CreateAccount> }
+        {state_account && hashDoubleSecurity && !ref_doubleSecurity.current && <DoubleSecurityInput hashDoubleSecurity={hashDoubleSecurity}></DoubleSecurityInput>}
+       {state_account && !hashDoubleSecurity ? <PasswordManager state_account={state_account} setAccount={setAccount}></PasswordManager>:  <CreateAccount callback={fetchaccount}></CreateAccount> }
           </passwordManagerContext.Provider>
      
       </div>

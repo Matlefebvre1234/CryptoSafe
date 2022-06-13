@@ -4,11 +4,9 @@ import CreateAccount from '../components/CreateAccount'
 import { Contract, ethers } from 'ethers'
 import contractAddress from '../abi/contractAddress'
 import abi from "../abi/Master.json"
-import abiAccount from "../abi/Account.json";
 import web3Context from '../Context/web3Context'
 import PasswordManager from '../components/PasswordManager'
 import passwordManagerContext from '../Context/PasswordManagerContext'
-import DoubleSecurityInput from '../components/DoubleSecurityInput'
 
 
 export default function Dashboard() {
@@ -17,7 +15,6 @@ export default function Dashboard() {
     const ref_account = useRef();
     const [state_account, setAccount] = useState()
     const ref_doubleSecurity = useRef();
-    const [hashDoubleSecurity,setHashDoubleSecurity]= useState();
 
     async function fetchaccount()
     {
@@ -28,8 +25,6 @@ export default function Dashboard() {
             ref_account.current = await contract.getAccount(web3.ref_address.current);
             if(ref_account.current !== ethers.constants.AddressZero) setAccount(ref_account.current);
             else setAccount(null);
-
-            await fetchDoubleSecurity();
         
         } else{
             setAccount(null);
@@ -37,20 +32,19 @@ export default function Dashboard() {
       
     }
 
-    async function fetchDoubleSecurity()
-    {
-        if(ref_account.current)
-        {
-            let contract = new Contract(ref_account.current,abiAccount,web3.ref_provider.current.getSigner());
-            const hash =  await contract.getHashDoubleSecurity();
-              setHashDoubleSecurity(hash);
+ 
+    async function fetchPassword () {
+        const contract = new Contract(
+          state_account,
+          abi,
+          web3.ref_provider.current.getSigner()
+        );
+        const arr = await contract.getlistPassword();
+        return arr;
+      }
+    
 
-        }
-            
-        
-    }
-    
-    
+
     useEffect(()=>{
          fetchaccount();
       // eslint-disable-next-line  
@@ -60,6 +54,7 @@ export default function Dashboard() {
         ref_account: ref_account,
         ref_doubleSecurity: ref_doubleSecurity,
         state_account: state_account,
+        fetchPassword:fetchPassword,
         setAccount: setAccount
     }
   return (
@@ -67,11 +62,7 @@ export default function Dashboard() {
 
           <passwordManagerContext.Provider value={contextPackage}>
           <Header></Header>
-
-        {state_account && hashDoubleSecurity && !ref_doubleSecurity.current && <DoubleSecurityInput hashDoubleSecurity={hashDoubleSecurity} setHashDoubleSecurity={setHashDoubleSecurity} ></DoubleSecurityInput>}
-
-        { state_account && !hashDoubleSecurity && <PasswordManager state_account={state_account} setAccount={setAccount}></PasswordManager>}
-       {!state_account && <CreateAccount callback={fetchaccount}></CreateAccount> }
+       {state_account ? <PasswordManager state_account={state_account} setAccount={setAccount}></PasswordManager>:  <CreateAccount callback={fetchaccount}></CreateAccount> }
           </passwordManagerContext.Provider>
      
       </div>

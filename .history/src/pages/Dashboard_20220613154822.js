@@ -39,12 +39,13 @@ export default function Dashboard() {
 
     async function fetchDoubleSecurity()
     {
+        console.log(ref_account.current)
         if(ref_account.current)
         {
             let contract = new Contract(ref_account.current,abiAccount,web3.ref_provider.current.getSigner());
             const hash =  await contract.getHashDoubleSecurity();
               setHashDoubleSecurity(hash);
-
+             console.log(hash)
         }
             
         
