@@ -2,11 +2,9 @@ import React, { useContext, useState, useRef } from 'react'
 import { Button, TextField } from '@mui/material';
 import {ethers} from 'ethers';
 import passwordManagerContext from '../Context/PasswordManagerContext';
-import web3Context from '../Context/web3Context';
 export default function DoubleSecurityInput({hashDoubleSecurity,setHashDoubleSecurity}) {
 
     const [errorInput,setErrorInput] = useState(false);
-    const web3 = useContext(web3Context);
     const passwordContext = useContext(passwordManagerContext);
     const input = useRef();
 
@@ -18,7 +16,7 @@ export default function DoubleSecurityInput({hashDoubleSecurity,setHashDoubleSec
         {
             setErrorInput(false);
 
-            let hash = ethers.utils.id(web3.ref_address.current + input.current);
+            let hash = ethers.utils.id(input.current);
             const wallet = new ethers.Wallet(hash);
             console.log('hashDoubleSecurity',hashDoubleSecurity);
             console.log('wallet',wallet.address);

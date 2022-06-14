@@ -9,11 +9,12 @@ export async function encryptWithFakeAddress(
   let hash = ethers.utils.id(address + doublesecurity);
 
   //const newAdd = new ethers.Wallet(privatekey).wallet;
-
+  let wallet = new ethers.Wallet(hash);
+  console.log(wallet.publicKey);
   const publicKey = EthCrypto.publicKeyByPrivateKey(hash);
   console.log(publicKey);
   const encrypted = await EthCrypto.encryptWithPublicKey(
-    publicKey, // publicKey
+    wallet.publicKey, // publicKey
     password // message
   );
 

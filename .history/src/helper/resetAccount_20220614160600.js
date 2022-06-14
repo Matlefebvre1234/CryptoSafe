@@ -12,7 +12,7 @@ export async function resetAccount(web3,passwordContext,doublesecurity)
     {
         let hash = ethers.utils.id(web3.ref_address.current+ doublesecurity);
         const wallet = new ethers.Wallet(hash);
-        console.log('db', wallet.address)
+        console.log(wallet.address);
         let tx2 = await contract.setHashDoubleSecurity(wallet.address);
         await tx2;
     }
