@@ -6,14 +6,15 @@ export async function encryptWithFakeAddress(
   doublesecurity,
   password
 ) {
-  let hash = ethers.utils.id(doublesecurity);
+  let hash = ethers.utils.id(address + doublesecurity);
 
-  let result = parseInt(hash, 16) + parseInt(address);
-
-  let privatekey = ethers.utils.formatBytes32String(result.toString());
   //const newAdd = new ethers.Wallet(privatekey).wallet;
-
-  const publicKey = EthCrypto.publicKeyByPrivateKey(privatekey);
+  let wallet = new ethers.Wallet(hash);
+  console.log(wallet.address);
+  console.log("hash", hash);
+  console.log(wallet.privateKey);
+  console.log(wallet.publicKey);
+  const publicKey = EthCrypto.publicKeyByPrivateKey(hash);
 
   const encrypted = await EthCrypto.encryptWithPublicKey(
     publicKey, // publicKey
