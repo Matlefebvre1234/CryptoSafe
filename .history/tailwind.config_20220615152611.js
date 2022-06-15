@@ -1,12 +1,14 @@
 module.exports = {
+theme:{
+  colors: {
+    'blueInput' : '#22d3ee',
+  },
   corePlugins: {
     preflight: false,
   },
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    
     extend: {
-   
       fontFamily: {
         Concert: " 'Titan One', cursive",
         Cairo: "'Cairo', sans-serif",
@@ -14,4 +16,6 @@ module.exports = {
     },
   },
   plugins: [],
+}
+ 
 };

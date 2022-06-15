@@ -6,7 +6,9 @@ module.exports = {
   theme: {
     
     extend: {
-   
+      colors: {
+        secondaryy: "#9CF8FF"
+      },
       fontFamily: {
         Concert: " 'Titan One', cursive",
         Cairo: "'Cairo', sans-serif",

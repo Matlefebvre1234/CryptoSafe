@@ -167,12 +167,12 @@ export default function EditPasswordButton({
             </div>
           )}
         </DialogContent>
-        <DialogActions className="p-2">
+        <DialogActions className="p-5">
           {!loading && (
             <Button
               size="medium"
               variant="contained"
-              className="bg-cyan-400 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
+              className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
               onClick={editPassword}
             >
               Save

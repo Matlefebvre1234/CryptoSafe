@@ -167,7 +167,7 @@ export default function EditPasswordButton({
             </div>
           )}
         </DialogContent>
-        <DialogActions className="p-2">
+        <DialogActions className="p-5">
           {!loading && (
             <Button
               size="medium"

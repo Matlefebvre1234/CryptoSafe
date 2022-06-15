@@ -151,6 +151,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
                 onChange={(e) => {
                   inputPassword.current = e.target.value;
                 }}
+                variant="filled"
                 id="password"
                 label="Password"
                 className="my-2 font-Cairo"

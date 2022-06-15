@@ -137,7 +137,7 @@ export default function EditPasswordButton({
             <div className="flex flex-col">
               <TextField
                 required
-                size="small"
+                variant="filled"
                 id="Name"
                 defaultValue={password.name}
                 onChange={(e) => {
@@ -157,7 +157,7 @@ export default function EditPasswordButton({
                   modified.current = true;
                 }}
                 defaultValue={inputPassword.current}
-                
+                variant="filled"
                 id="password"
                 label="Password"
                 className="my-2 font-Cairo"
@@ -167,12 +167,12 @@ export default function EditPasswordButton({
             </div>
           )}
         </DialogContent>
-        <DialogActions className="p-2">
+        <DialogActions className="p-5">
           {!loading && (
             <Button
               size="medium"
               variant="contained"
-              className="bg-cyan-400 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
+              className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
               onClick={editPassword}
             >
               Save

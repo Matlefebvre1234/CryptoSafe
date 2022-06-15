@@ -62,7 +62,6 @@ export default function DoubleSecurityInput({
         </span>
         <TextField
           required
-       
           error={errorInput}
           id="Password"
           type="password"
@@ -71,7 +70,7 @@ export default function DoubleSecurityInput({
           }}
           label="Password"
           size="small"
-          className="my-5 font-Cairo"
+          className="my-∞ font-Cairo"
           InputProps={{
             style: { fontSize: 15, borderRadius: 15, background: "#F6F6F6" },
           }}

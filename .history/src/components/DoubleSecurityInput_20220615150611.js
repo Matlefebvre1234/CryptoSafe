@@ -62,7 +62,7 @@ export default function DoubleSecurityInput({
         </span>
         <TextField
           required
-       
+          color="#F6F6F6"
           error={errorInput}
           id="Password"
           type="password"

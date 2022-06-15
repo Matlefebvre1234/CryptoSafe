@@ -18,6 +18,7 @@ import abiMaster from "../abi/Master.json";
 import { encryptWithFakeAddress } from "../helper/encrypt";
 import contractAddress from "../abi/contractAddress";
 import passwordManagerContext from "../Context/PasswordManagerContext";
+import { display, flexbox } from "@mui/system";
 export default function NewPasswordButton({ callback, account }) {
   const [open, setOpen] = useState(false);
   const [errorName, setErrorName] = useState(false);
@@ -184,7 +185,7 @@ export default function NewPasswordButton({ callback, account }) {
             </div>
           )}
         </DialogContent>
-        <DialogActions className="p-2">
+        <DialogActions className="">
           {!loading && (
             <Button
               size="medium"

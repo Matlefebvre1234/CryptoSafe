@@ -18,6 +18,7 @@ import abiMaster from "../abi/Master.json";
 import { encryptWithFakeAddress } from "../helper/encrypt";
 import contractAddress from "../abi/contractAddress";
 import passwordManagerContext from "../Context/PasswordManagerContext";
+import { display, flexbox } from "@mui/system";
 export default function NewPasswordButton({ callback, account }) {
   const [open, setOpen] = useState(false);
   const [errorName, setErrorName] = useState(false);
@@ -165,7 +166,6 @@ export default function NewPasswordButton({ callback, account }) {
                 className="my-2 text-xs font-Cairo"
                 size="small"
                 InputProps={{ style: {fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"} }}
-                InputLabelProps = {{style: {fontSize: 13}}}
               />
               <TextField
                 required
@@ -177,19 +177,19 @@ export default function NewPasswordButton({ callback, account }) {
                 
                 id="password"
                 label="Password"
-                className="my-2 font-Cairo"
+                className="my-2 font-Cairo flex justify-center items-center"
                 InputProps={{ style: { fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"} }}
-                InputLabelProps = {{style: {fontSize: 13}}}
+                InputLabelProps = {{style: {fontSize: 13, color: "9CF8FF" }}}
               />
             </div>
           )}
         </DialogContent>
-        <DialogActions className="p-2">
+        <DialogActions className="p-5">
           {!loading && (
             <Button
               size="medium"
               variant="contained"
-              className="bg-cyan-400 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
+              className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
               onClick={validInput}
             >
               create
