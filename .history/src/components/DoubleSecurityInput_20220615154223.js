@@ -13,20 +13,6 @@ import web3Context from "../Context/web3Context";
 import HelpIcon from "@mui/icons-material/Help";
 import { resetAccount } from "../helper/resetAccount";
 import CloseIcon from "@mui/icons-material/Close";
-import { createTheme, ThemeProvider } from "@mui/system";
-
-
-const theme = createTheme({
-  palette: {
-    test: {
-      // Purple and green play nicely together.
-      main: '#9CF8FF',
-    },
-},
-});
-
-
-
 export default function DoubleSecurityInput({
   hashDoubleSecurity,
   setHashDoubleSecurity,
@@ -74,10 +60,9 @@ export default function DoubleSecurityInput({
         <span className=" 2xl:text-lg text-center text-black font-Cairo">
           Enter your DoubleSecurity Password{" "}
         </span>
-        <ThemeProvider theme={theme}>
         <TextField
           required
-          color="test"
+       
           error={errorInput}
           id="Password"
           type="password"
@@ -92,8 +77,6 @@ export default function DoubleSecurityInput({
           }}
           InputLabelProps={{ style: { fontSize: 13 } }}
         />
-        </ThemeProvider>
-        
         <Button
           size="medium"
           variant="contained"

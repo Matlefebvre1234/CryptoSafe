@@ -18,9 +18,9 @@ import { createTheme, ThemeProvider } from "@mui/system";
 
 const theme = createTheme({
   palette: {
-    test: {
+    primary: {
       // Purple and green play nicely together.
-      main: '#9CF8FF',
+      main: "#9CF8FF",
     },
 },
 });
@@ -77,7 +77,7 @@ export default function DoubleSecurityInput({
         <ThemeProvider theme={theme}>
         <TextField
           required
-          color="test"
+          color="primary.main"
           error={errorInput}
           id="Password"
           type="password"
