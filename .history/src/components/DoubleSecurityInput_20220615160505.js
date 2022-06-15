@@ -20,7 +20,7 @@ const theme = createTheme({
   palette: {
     test: {
       // Purple and green play nicely together.
-      main: '#4DE7ED',
+      main: '#6DD7F7',
     },
 },
 });
