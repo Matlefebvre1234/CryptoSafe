@@ -17,7 +17,7 @@ export async function encryptWithFakeAddress(
     password // message
   );
 
-  console.log('encrypted', encrypted);
+  console.log("encrypted", encrypted);
   const str = EthCrypto.cipher.stringify(encrypted);
 
   return str;
