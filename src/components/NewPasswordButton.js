@@ -10,6 +10,7 @@ import {
   IconButton,
   Snackbar,
   Alert,
+  Grow
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
@@ -280,7 +281,7 @@ export default function NewPasswordButton({ callback, account }) {
           )}
         </DialogActions>
       </Dialog>
-      <Snackbar open={openSnakBar} autoHideDuration={6000}>
+      <Snackbar open={openSnakBar} autoHideDuration={3000} onClose={() =>{setOpenSnackBar(false)}} TransitionComponent={Grow}>
         <Alert
           variant="filled"
           onClose={handleCloseSnackBar}

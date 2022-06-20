@@ -10,6 +10,7 @@ import {
   IconButton,
   Snackbar,
   Alert,
+  Grow
 } from "@mui/material";
 import web3Context from "../Context/web3Context";
 import { CircularProgress } from "@mui/material";
@@ -166,7 +167,7 @@ export default function EditPasswordButton({
     } else {
       setErrorName(false);
     }
-
+    
     if (inputPassword.current === "") {
       setErrorPassword(true);
       valid = false;
@@ -304,7 +305,7 @@ export default function EditPasswordButton({
           )}
         </DialogActions>
       </Dialog>
-      <Snackbar open={openSnakBar} autoHideDuration={6000}>
+      <Snackbar open={openSnakBar}  autoHideDuration={3000} onClose={() =>{setOpenSnackBar(false)}} TransitionComponent={Grow}>
         <Alert
           variant="filled"
           onClose={handleCloseSnackBar}

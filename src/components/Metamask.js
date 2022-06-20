@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useEffect, useContext } from "react";
 import Button from "@mui/material/Button";
 import {
@@ -8,6 +8,11 @@ import {
   DialogContent,
   Card,
   IconButton,
+  Tooltip,
+  Grow,
+  Zoom,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import ExploreIcon from "@mui/icons-material/Explore";
 import CloseIcon from "@mui/icons-material/Close";
@@ -20,6 +25,7 @@ import { getExplorer } from "../helper/getExplorer";
 export default function Metamask({ size, text }) {
   const web3 = useContext(web3Context);
   const [open, setOpen] = React.useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const chainId = useRef("");
 
@@ -102,6 +108,10 @@ export default function Metamask({ size, text }) {
     setOpen(false);
   };
 
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+  }
+
   return (
     <div className="">
       <Button
@@ -141,9 +151,25 @@ export default function Metamask({ size, text }) {
           </DialogTitle>
           <DialogContent>
             <Card variant="outlined" className="p-5 rounded-lg">
-              <span className="text-gray-500 font-Cairos">
-                {web3.state_address}
-              </span>
+              <Tooltip
+                title="Copy"
+                className="hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
+                arrow
+                placement="top"
+                TransitionComponent={Zoom}
+              >
+                
+                <span
+                  onClick={() => {
+                    setOpenSnackBar(true);
+                    copyToClipboard(web3.state_address);
+                  }}
+                  className="text-gray-500 font-Cairos"
+                >
+                  {web3.state_address}
+                </span>
+              </Tooltip>
+
               <a
                 href={
                   web3.ref_explorer.current + "/address/" + web3.state_address
@@ -219,6 +245,25 @@ export default function Metamask({ size, text }) {
           </DialogContent>
         </Dialog>
       )}
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={3000}
+        onClose={() => {
+          setOpenSnackBar(false);
+        }}
+        TransitionComponent={Grow}
+      >
+        <Alert
+          variant="filled"
+          onClose={() => {
+            setOpenSnackBar(false);
+          }}
+          severity="info"
+          sx={{ width: "100%" }}
+        >
+          Copied !
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
