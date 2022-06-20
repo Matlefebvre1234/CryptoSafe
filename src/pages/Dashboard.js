@@ -15,7 +15,8 @@ export default function Dashboard() {
     
     const web3 = useContext(web3Context);
     const ref_account = useRef();
-    const [state_account, setAccount] = useState()
+    const [state_account, setAccount] = useState();
+    const  [accountStorage,setAccountStorage] = useState('');
     const ref_doubleSecurity = useRef();
     const [hashDoubleSecurity,setHashDoubleSecurity]= useState();
 
@@ -26,9 +27,14 @@ export default function Dashboard() {
 
             let contract = new Contract(contractAddress,abi,web3.ref_provider.current.getSigner());
             ref_account.current = await contract.getAccount(web3.ref_address.current);
-            if(ref_account.current !== ethers.constants.AddressZero) setAccount(ref_account.current);
-            else setAccount(null);
+            if(ref_account.current !== ethers.constants.AddressZero){
+                let contractAccount = new Contract(ref_account.current,abiAccount,web3.ref_provider.current.getSigner());
+                setAccountStorage(await contractAccount.accountStorage());
 
+                setAccount(ref_account.current);
+            } 
+            else setAccount(null);
+            
             await fetchDoubleSecurity();
         
         } else{
@@ -39,7 +45,7 @@ export default function Dashboard() {
 
     async function fetchDoubleSecurity()
     {
-        if(ref_account.current)
+        if(ref_account.current !== ethers.constants.AddressZero)
         {
             let contract = new Contract(ref_account.current,abiAccount,web3.ref_provider.current.getSigner());
             const hash =  await contract.getHashDoubleSecurity();
@@ -67,7 +73,7 @@ export default function Dashboard() {
 
         {state_account && hashDoubleSecurity && !ref_doubleSecurity.current && <DoubleSecurityInput hashDoubleSecurity={hashDoubleSecurity} setHashDoubleSecurity={setHashDoubleSecurity} ></DoubleSecurityInput>}
 
-        { state_account && !hashDoubleSecurity && <PasswordManager state_account={state_account} setAccount={setAccount}></PasswordManager>}
+        { state_account && !hashDoubleSecurity && <PasswordManager accountStorage={accountStorage} state_account={state_account} setAccount={setAccount}></PasswordManager>}
        {!state_account && <CreateAccount callback={fetchaccount}></CreateAccount> }
           </passwordManagerContext.Provider>
      

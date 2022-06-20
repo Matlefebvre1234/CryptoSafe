@@ -8,6 +8,8 @@ import {
   TextField,
   Button,
   IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import web3Context from "../Context/web3Context";
 import { CircularProgress } from "@mui/material";
@@ -26,31 +28,55 @@ export default function EditPasswordButton({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const inputName = useRef(password.name);
-  const inputPassword = useRef(decrypted);
+  const inputPassword = useRef(decrypted.password);
+  const inputUsername = useRef(decrypted.username);
   const web3 = useContext(web3Context);
   const passwordContext = useContext(passwordManagerContext);
   const modified = useRef(false);
-
+  const [openSnakBar, setOpenSnackBar] = useState(false);
+  const [errorName, setErrorName] = useState(false);
+  const [errorUsername, setErrorUsername] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
   async function decrypt() {
-    if (!decrypted) {
-      let lastDecryption;
+    if (decrypted.username === "" || decrypted.password === "") {
+      let lastDecryptionPassword;
+      let lastDecryptionUsername;
 
       inputPassword.current = await window.ethereum.request({
         method: "eth_decrypt",
         params: [password.password, web3.ref_address.current],
       });
+
+      inputUsername.current = await window.ethereum.request({
+        method: "eth_decrypt",
+        params: [password.username, web3.ref_address.current],
+      });
       if (passwordContext.ref_doubleSecurity.current) {
-        lastDecryption = await decryptWithFakeAddress(
+        lastDecryptionPassword = await decryptWithFakeAddress(
           web3.ref_address.current,
           passwordContext.ref_doubleSecurity.current,
           inputPassword.current
         );
+        lastDecryptionUsername = await decryptWithFakeAddress(
+          web3.ref_address.current,
+          passwordContext.ref_doubleSecurity.current,
+          inputUsername.current
+        );
+
+        inputUsername.current = lastDecryptionUsername;
+        inputPassword.current = lastDecryptionPassword;
       } else {
-        lastDecryption = inputPassword.current;
+        lastDecryptionPassword = inputPassword.current;
+        lastDecryptionUsername = inputUsername.current;
       }
-      setDecrypted(lastDecryption);
+
+      setDecrypted({
+        username: lastDecryptionUsername,
+        password: lastDecryptionPassword,
+      });
     } else {
-      inputPassword.current = decrypted;
+      inputPassword.current = decrypted.password;
+      inputUsername.current = decrypted.username;
     }
   }
 
@@ -60,12 +86,25 @@ export default function EditPasswordButton({
       const ethUtil = require("ethereumjs-util");
       const sigUtil = require("@metamask/eth-sig-util");
 
-      const encryptedMessage = ethUtil.bufferToHex(
+      const encryptedPassword = ethUtil.bufferToHex(
         Buffer.from(
           JSON.stringify(
             sigUtil.encrypt({
               publicKey: web3.ref_encryptionPubKey.current,
               data: inputPassword.current,
+              version: "x25519-xsalsa20-poly1305",
+            })
+          ),
+          "utf8"
+        )
+      );
+
+      const encryptedUsername = ethUtil.bufferToHex(
+        Buffer.from(
+          JSON.stringify(
+            sigUtil.encrypt({
+              publicKey: web3.ref_encryptionPubKey.current,
+              data: inputUsername.current,
               version: "x25519-xsalsa20-poly1305",
             })
           ),
@@ -81,11 +120,15 @@ export default function EditPasswordButton({
       const tx = await contract.updatePassword(
         password.id,
         inputName.current,
-        encryptedMessage.toString()
+        encryptedUsername.toString(),
+        encryptedPassword.toString()
       );
       await tx.wait();
       setLoading(false);
-      setDecrypted(inputPassword.current);
+      setDecrypted({
+        username: inputUsername.current,
+        password: inputPassword.current,
+      });
       handleClose();
       callback();
     } else {
@@ -96,6 +139,51 @@ export default function EditPasswordButton({
   function handleClose() {
     setOpen(false);
     setLoading(false);
+    setErrorName(false);
+    setErrorPassword(false);
+    setErrorUsername(false);
+    handleCloseSnackBar();
+  }
+  function handleCloseSnackBar() {
+    setOpenSnackBar(false);
+  }
+  function validInput() {
+    let valid = true;
+
+    if (
+      inputName.current.length > 50 ||
+      inputUsername.current.length > 50 ||
+      inputPassword.current.length > 50
+    ) {
+      setOpenSnackBar(true);
+      valid = false;
+    } else {
+      handleCloseSnackBar();
+    }
+    if (inputName.current === "") {
+      setErrorName(true);
+      valid = false;
+    } else {
+      setErrorName(false);
+    }
+
+    if (inputPassword.current === "") {
+      setErrorPassword(true);
+      valid = false;
+    } else {
+      setErrorPassword(false);
+    }
+
+    if (inputUsername.current === "") {
+      setErrorUsername(true);
+      valid = false;
+    } else {
+      setErrorUsername(false);
+    }
+
+    if (valid) {
+      editPassword();
+    }
   }
   return (
     <div className="w-full">
@@ -137,6 +225,7 @@ export default function EditPasswordButton({
             <div className="flex flex-col">
               <TextField
                 required
+                error={errorName}
                 size="small"
                 id="Name"
                 defaultValue={password.name}
@@ -155,9 +244,33 @@ export default function EditPasswordButton({
                 }}
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
+
               <TextField
                 required
                 size="small"
+                error={errorUsername}
+                onChange={(e) => {
+                  inputUsername.current = e.target.value;
+                  modified.current = true;
+                }}
+                defaultValue={inputUsername.current}
+                id="username"
+                label="Username"
+                className="my-2 font-Cairo"
+                InputProps={{
+                  style: {
+                    fontSize: 15,
+                    borderRadius: 15,
+                    background: "#F6F6F6",
+                  },
+                }}
+                InputLabelProps={{ style: { fontSize: 13 } }}
+              />
+
+              <TextField
+                required
+                size="small"
+                error={errorPassword}
                 onChange={(e) => {
                   inputPassword.current = e.target.value;
                   modified.current = true;
@@ -184,13 +297,24 @@ export default function EditPasswordButton({
               size="medium"
               variant="contained"
               className="bg-blue-800 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
-              onClick={editPassword}
+              onClick={validInput}
             >
               Save
             </Button>
           )}
         </DialogActions>
       </Dialog>
+      <Snackbar open={openSnakBar} autoHideDuration={6000}>
+        <Alert
+          variant="filled"
+          onClose={handleCloseSnackBar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          The max lenght of caracters for the name ,the username and the
+          password is 50 !
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

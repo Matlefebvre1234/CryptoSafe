@@ -19,7 +19,7 @@ export default function Header() {
         </div>
 
         <MenuIcon
-          className="lg:hidden text-black"
+          className="lg:hidden text-white"
           onClick={() => setOpenMenu((prev) => !prev)}
         ></MenuIcon>
 

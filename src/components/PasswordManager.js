@@ -8,7 +8,7 @@ import PasswordCard from "./PasswordCard";
 import NewPasswordButton from "./NewPasswordButton";
 import Setting from "../components/Setting/Setting";
 import SettingsIcon from "@mui/icons-material/Settings";
-export default function PasswordManager({ state_account, setAccount }) {
+export default function PasswordManager({ state_account, setAccount, accountStorage }) {
   const web3 = useContext(web3Context);
   const [listPassword, setListPassword] = useState();
   const [loading, setLoading] = useState(true);
@@ -44,18 +44,20 @@ export default function PasswordManager({ state_account, setAccount }) {
     <div className="p-5">
       <Card variant="outlined" className="p-5">
         <div className="w-full">
-          <Card className="p-5 flex lg:flex-row flex-col justify-center items-center bg-neutral-100 ">
-            <span className="font-Concert text-black text-xs lg:text-sm mx-2 my-2">
+          <Card className="p-5 flex-col justify-center items-center bg-neutral-100 ">
+
+            <div className="flex lg:flex-row flex-col justify-center items-center">
+            <span className="font-Concert text-black text-xs lg:text-left text-center lg:text-sm w-48 mx-2 my-2">
               {" "}
               Your Contract Account :{" "}
             </span>
-            <span className="font-Cairo lg:mx-2 lg:my-0 my-2 text-black text-sm lg:text-sm">
+            <span className="font-Cairo lg:mx-2 lg:my-0 my-2 w-80 text-black text-sm lg:text-sm">
               {state_account}
             </span>
 
             <a
               href={
-                web3.ref_explorer.current + "/address/" + web3.state_address
+                web3.ref_explorer.current + "/address/" + state_account
               }
               target="_blank"
               rel="noreferrer"
@@ -70,6 +72,35 @@ export default function PasswordManager({ state_account, setAccount }) {
                 Explorer
               </Button>
             </a>
+            </div>
+            <div className="flex lg:flex-row mt-2 flex-col justify-center items-center">
+            <span className="font-Concert text-black text-xs lg:text-left text-center lg:text-sm w-48 mx-2 my-2">
+              {" "}
+              Your Storage Account :{" "}
+            </span>
+            <span className="font-Cairo lg:mx-2 lg:my-0 my-2 w-80 text-black text-sm lg:text-sm">
+              {accountStorage}
+            </span>
+
+            <a
+              href={
+                web3.ref_explorer.current + "/address/" + accountStorage
+              }
+              target="_blank"
+              rel="noreferrer"
+              className="no-underline mx-3 flex justify-center items-center my-2"
+            >
+              <Button
+                size="small"
+                variant="contained"
+                className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+                startIcon={<ExploreIcon></ExploreIcon>}
+              >
+                Explorer
+              </Button>
+            </a>
+            </div>
+           
           </Card>
         </div>
 

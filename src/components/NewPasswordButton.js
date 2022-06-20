@@ -8,6 +8,8 @@ import {
   TextField,
   CircularProgress,
   IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
@@ -19,8 +21,10 @@ import { encryptWithFakeAddress } from "../helper/encrypt";
 import contractAddress from "../abi/contractAddress";
 import passwordManagerContext from "../Context/PasswordManagerContext";
 export default function NewPasswordButton({ callback, account }) {
+  const [openSnakBar, setOpenSnackBar] = useState(false);
   const [open, setOpen] = useState(false);
   const [errorName, setErrorName] = useState(false);
+  const [errorUsername, setErrorUsername] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const web3 = useContext(web3Context);
@@ -28,9 +32,21 @@ export default function NewPasswordButton({ callback, account }) {
   const passwordContext = useContext(passwordManagerContext);
   const inputName = useRef("");
   const inputPassword = useRef("");
+  const inputUsername = useRef("");
 
   function validInput() {
     let valid = true;
+
+    if (
+      inputName.current.length > 50 ||
+      inputUsername.current.length > 50 ||
+      inputPassword.current.length > 50
+    ) {
+      setOpenSnackBar(true);
+      valid = false;
+    } else {
+      handleCloseSnackBar();
+    }
     if (inputName.current === "") {
       setErrorName(true);
       valid = false;
@@ -45,6 +61,13 @@ export default function NewPasswordButton({ callback, account }) {
       setErrorPassword(false);
     }
 
+    if (inputUsername.current === "") {
+      setErrorUsername(true);
+      valid = false;
+    } else {
+      setErrorUsername(false);
+    }
+
     if (valid) {
       createPassword();
     }
@@ -53,34 +76,54 @@ export default function NewPasswordButton({ callback, account }) {
   async function createPassword() {
     setLoading(true);
 
-    let encrypted;
-
+    let encryptedPassword;
+    let encryptedUsername;
     if (passwordContext.ref_doubleSecurity.current) {
-      encrypted = await encryptWithFakeAddress(
+      encryptedPassword = await encryptWithFakeAddress(
         web3.ref_address.current,
         passwordContext.ref_doubleSecurity.current,
         inputPassword.current
       );
+
+      encryptedUsername = await encryptWithFakeAddress(
+        web3.ref_address.current,
+        passwordContext.ref_doubleSecurity.current,
+        inputUsername.current
+      );
     } else {
-      encrypted = inputPassword.current;
+      encryptedUsername = inputUsername.current;
+      encryptedPassword = inputPassword.current;
     }
 
     const ethUtil = require("ethereumjs-util");
     const sigUtil = require("@metamask/eth-sig-util");
 
-    const encryptedMessage = ethUtil.bufferToHex(
+    const encryptedMessagePassword = ethUtil.bufferToHex(
       Buffer.from(
         JSON.stringify(
           sigUtil.encrypt({
             publicKey: web3.ref_encryptionPubKey.current,
-            data: encrypted,
+            data: encryptedPassword,
             version: "x25519-xsalsa20-poly1305",
           })
         ),
         "utf8"
       )
     );
-    console.log("encrypted metamask", encryptedMessage);
+
+    const encryptedMessageUsername = ethUtil.bufferToHex(
+      Buffer.from(
+        JSON.stringify(
+          sigUtil.encrypt({
+            publicKey: web3.ref_encryptionPubKey.current,
+            data: encryptedUsername,
+            version: "x25519-xsalsa20-poly1305",
+          })
+        ),
+        "utf8"
+      )
+    );
+
     let contractMaster = new Contract(
       contractAddress,
       abiMaster,
@@ -99,7 +142,8 @@ export default function NewPasswordButton({ callback, account }) {
     const tx = await contract.addPassword(
       Date.now(),
       inputName.current,
-      encryptedMessage.toString(),
+      encryptedMessageUsername.toString(),
+      encryptedMessagePassword.toString(),
       override
     );
     await tx.wait();
@@ -111,6 +155,14 @@ export default function NewPasswordButton({ callback, account }) {
   function handleClose() {
     setOpen(false);
     setLoading(false);
+    setErrorName(false);
+    setErrorPassword(false);
+    setErrorUsername(false);
+    handleCloseSnackBar();
+  }
+
+  function handleCloseSnackBar() {
+    setOpenSnackBar(false);
   }
   return (
     <div>
@@ -172,6 +224,27 @@ export default function NewPasswordButton({ callback, account }) {
                 }}
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
+
+              <TextField
+                required
+                size="small"
+                error={errorUsername}
+                onChange={(e) => {
+                  inputUsername.current = e.target.value;
+                }}
+                id="username"
+                label="Username"
+                className="my-2 font-Cairo"
+                InputProps={{
+                  style: {
+                    fontSize: 15,
+                    borderRadius: 15,
+                    background: "#F6F6F6",
+                  },
+                }}
+                InputLabelProps={{ style: { fontSize: 13 } }}
+              />
+
               <TextField
                 required
                 size="small"
@@ -207,6 +280,17 @@ export default function NewPasswordButton({ callback, account }) {
           )}
         </DialogActions>
       </Dialog>
+      <Snackbar open={openSnakBar} autoHideDuration={6000}>
+        <Alert
+          variant="filled"
+          onClose={handleCloseSnackBar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          The max lenght of caracters for the name ,the username and the
+          password is 50 !
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

@@ -99,7 +99,7 @@ export default function DoubleSecurityInput({
         >
           Confirm
         </Button>
-        <IconButton className=" bg-blue-800" onClick={() => setOpen(true)}>
+        <IconButton className=" text-blue-800" onClick={() => setOpen(true)}>
           <HelpIcon></HelpIcon>
         </IconButton>
         <Dialog

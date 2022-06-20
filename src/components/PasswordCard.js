@@ -15,18 +15,45 @@ export default function PasswordCard({
 }) {
   const web3 = useContext(web3Context);
   const passwordContext = useContext(passwordManagerContext);
-  const [decrypted, setDecrypted] = useState();
+  const [decrypted, setDecrypted] = useState({username:'', password: ''});
 
   function decrypt() {
-    if (!decrypted) {
+
+    if (decrypted.username === '' || decrypted.password === '') {
       window.ethereum
         .request({
           method: "eth_decrypt",
           params: [password.password, web3.ref_address.current],
         })
         .then(async (decryptedMessage) => {
+
+          window.ethereum
+          .request({
+            method: "eth_decrypt",
+            params: [password.username, web3.ref_address.current],
+          }).then(async (decryptedUsername) => {
+            let lastDecryptionUsername;
+         
+            if (passwordContext.ref_doubleSecurity.current) {
+              lastDecryptionUsername = await decryptWithFakeAddress(
+                web3.ref_address.current,
+                passwordContext.ref_doubleSecurity.current,
+                decryptedUsername
+              );
+            } else {
+              lastDecryptionUsername = decryptedUsername;
+            }
+  
+            setDecrypted((prev) => {
+              let obj = {...prev};
+              obj.username = lastDecryptionUsername;
+              console.log(obj)
+              return obj;
+            });
+            setVisibility(true);
+          })
           let lastDecryption;
-          console.log(decryptedMessage);
+
           if (passwordContext.ref_doubleSecurity.current) {
             lastDecryption = await decryptWithFakeAddress(
               web3.ref_address.current,
@@ -37,7 +64,12 @@ export default function PasswordCard({
             lastDecryption = decryptedMessage;
           }
 
-          setDecrypted(lastDecryption);
+          setDecrypted((prev) => {
+            let obj = {...prev};
+            obj.password = lastDecryption;
+            return obj;
+          });
+          
         })
         .catch((error) => console.log(error.message));
     }
@@ -56,14 +88,15 @@ export default function PasswordCard({
         <div className="flex justify-center items-center w-full px-1">
           <div className="flex items-center mt-3 w-3/5">
             <span className="font-Cairotext-black">
-              {visibility && decrypted ? decrypted : "********"}
+              {visibility && decrypted ? decrypted.username : "********"}
             </span>
           </div>
           <div className="flex justify-center items-center mb-1 w-2/5 ">
             <div
               onClick={() => {
-                setVisibility((prev) => !prev);
+      
                 if (!visibility) decrypt();
+                if (visibility || decrypted.username !== '' || decrypted.password !== '') setVisibility((prev) => !prev);
               }}
               className=" bg-blue-800 w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
             >
@@ -75,7 +108,11 @@ export default function PasswordCard({
             </div>
           </div>
         </div>
-
+        <div className="flex items-center mt-3 w-3/5 px-1">
+            <span className="font-Cairotext-black">
+              {visibility && decrypted ? decrypted.password : "********"}
+            </span>
+          </div>
         <div className="flex justify-between items-center w-full mt-3">
           <EditPasswordButton
             password={password}
