@@ -31,6 +31,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
     await resetAccount(web3, passwordManager);
     setLoading(false);
     setCreated(true);
+    fetchPassword();
   }
 
   return (
