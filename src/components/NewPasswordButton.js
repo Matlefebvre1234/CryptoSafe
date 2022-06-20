@@ -29,7 +29,9 @@ export default function NewPasswordButton({ callback, account }) {
   const [errorPassword, setErrorPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const web3 = useContext(web3Context);
-
+  const fieldName = useRef();
+  const fieldUsername = useRef();
+  const fieldPassword = useRef();
   const passwordContext = useContext(passwordManagerContext);
   const inputName = useRef("");
   const inputPassword = useRef("");
@@ -165,6 +167,8 @@ export default function NewPasswordButton({ callback, account }) {
   function handleCloseSnackBar() {
     setOpenSnackBar(false);
   }
+
+
   return (
     <div>
       <Button
@@ -205,11 +209,18 @@ export default function NewPasswordButton({ callback, account }) {
           {loading ? (
             <CircularProgress></CircularProgress>
           ) : (
-            <div className="flex flex-col">
+            <form className="flex flex-col">
               <TextField
                 required
+                autoFocus={true}
                 error={errorName}
                 id="Name"
+                inputRef={fieldName}
+                onKeyDown={(e)=> {if(e.key ==='Enter'){
+                  console.log("enter");
+
+                  fieldUsername.current.focus()
+                }}}
                 onChange={(e) => {
                   inputName.current = e.target.value;
                 }}
@@ -228,11 +239,15 @@ export default function NewPasswordButton({ callback, account }) {
 
               <TextField
                 required
+                inputRef={fieldUsername}
                 size="small"
                 error={errorUsername}
                 onChange={(e) => {
                   inputUsername.current = e.target.value;
                 }}
+                onKeyDown={(e)=> {if(e.key ==='Enter'){
+                  fieldPassword.current.focus()
+                }}}
                 id="username"
                 label="Username"
                 className="my-2 font-Cairo"
@@ -249,6 +264,10 @@ export default function NewPasswordButton({ callback, account }) {
               <TextField
                 required
                 size="small"
+                inputRef={fieldPassword}
+                onKeyDown={(e)=> {if(e.key ==='Enter'){
+                  validInput();
+                }}}
                 error={errorPassword}
                 onChange={(e) => {
                   inputPassword.current = e.target.value;
@@ -265,7 +284,7 @@ export default function NewPasswordButton({ callback, account }) {
                 }}
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
-            </div>
+            </form>
           )}
         </DialogContent>
         <DialogActions className="p-2">

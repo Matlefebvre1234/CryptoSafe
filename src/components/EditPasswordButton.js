@@ -38,6 +38,8 @@ export default function EditPasswordButton({
   const [errorName, setErrorName] = useState(false);
   const [errorUsername, setErrorUsername] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const fieldUsername  = useRef();
+  const fieldPassword  = useRef();
   async function decrypt() {
     if (decrypted.username === "" || decrypted.password === "") {
       let lastDecryptionPassword;
@@ -230,6 +232,12 @@ export default function EditPasswordButton({
                 size="small"
                 id="Name"
                 defaultValue={password.name}
+                onKeyDown={(e) =>{
+                  if(e.key === 'Enter')
+                  {
+                    fieldUsername.current.focus();
+                  }
+                }}
                 onChange={(e) => {
                   inputName.current = e.target.value;
                   modified.current = true;
@@ -249,10 +257,17 @@ export default function EditPasswordButton({
               <TextField
                 required
                 size="small"
+                inputRef={fieldUsername}
                 error={errorUsername}
                 onChange={(e) => {
                   inputUsername.current = e.target.value;
                   modified.current = true;
+                }}
+                onKeyDown={(e) =>{
+                  if(e.key === 'Enter')
+                  {
+                    fieldPassword.current.focus();
+                  }
                 }}
                 defaultValue={inputUsername.current}
                 id="username"
@@ -271,7 +286,14 @@ export default function EditPasswordButton({
               <TextField
                 required
                 size="small"
+                inputRef={fieldPassword}
                 error={errorPassword}
+                onKeyDown={(e) =>{
+                  if(e.key === 'Enter')
+                  {
+                    validInput();
+                  }
+                }}
                 onChange={(e) => {
                   inputPassword.current = e.target.value;
                   modified.current = true;

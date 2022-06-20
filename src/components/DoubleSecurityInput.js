@@ -74,6 +74,7 @@ export default function DoubleSecurityInput({
         <ThemeProvider theme={theme}>
           <TextField
             required
+            autoFocus={true}
             color="test"
             error={errorInput}
             id="Password"
@@ -84,6 +85,12 @@ export default function DoubleSecurityInput({
             label="Password"
             size="small"
             className="my-5 font-Cairo"
+            onKeyDown={(event)=>{
+              if(event.key === 'Enter')
+              {
+                submit()
+              }
+            }}
             InputProps={{
               style: { fontSize: 15, borderRadius: 15, background: "#F6F6F6" },
             }}

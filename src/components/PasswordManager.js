@@ -66,8 +66,8 @@ export default function PasswordManager({
           <Card className="p-5 flex-col justify-center items-center bg-neutral-100 ">
             <div className="flex lg:flex-row flex-col justify-center items-center">
               <span className="font-Concert text-black text-xs lg:text-left text-center lg:text-sm w-48 mx-2 my-2">
-                {" "}
-                Your Contract Account :{" "}
+               
+                Your Contract Account :
               </span>
               <Tooltip
                 title="Copy"

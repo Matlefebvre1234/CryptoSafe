@@ -105,9 +105,9 @@ export default function PasswordCard({
                 open={tooltipUsername}
                 title="Copy"
                 className={
-                  visibility &&
-                  decrypted &&
-                  "hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
+                  (visibility &&
+                  decrypted ) ?
+                  "hover:text-cyan-400 transform hover:scale-105 cursor-pointer" : ''
                 }
                 onClose={() => {
                   setTooltipsUsername(false);
@@ -160,9 +160,9 @@ export default function PasswordCard({
               open={tooltipPassword}
               title="Copy"
               className={
-                visibility &&
-                decrypted &&
-                "hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
+                (visibility &&
+                decrypted) ?
+                "hover:text-cyan-400 transform hover:scale-105 cursor-pointer": ''
               }
               onClose={() => {
                 setTooltipsPassword(false);
