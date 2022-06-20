@@ -64,7 +64,7 @@ export default function PasswordManager({ state_account, setAccount }) {
               <Button
                 size="small"
                 variant="contained"
-                className="bg-sky-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+                className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
                 startIcon={<ExploreIcon></ExploreIcon>}
               >
                 Explorer
@@ -85,7 +85,7 @@ export default function PasswordManager({ state_account, setAccount }) {
                 setOpenSetting(true);
               }}
               variant="contained"
-              className="bg-sky-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+              className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
               startIcon={<SettingsIcon></SettingsIcon>}
             >
               Settings

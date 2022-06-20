@@ -103,11 +103,11 @@ export default function Metamask({ size, text }) {
   };
 
   return (
-    <div>
+    <div className="">
       <Button
         size={size}
         variant="contained"
-        className="bg-cyan-300 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
+        className="bg-cyan-400 hover:bg-blue-500 mx-2 font-Concert hover:transform hover:scale-105"
         startIcon={<AccountBalanceWalletIcon></AccountBalanceWalletIcon>}
         onClick={web3.state_address ? handleClickOpen : Connect}
       >
@@ -152,7 +152,7 @@ export default function Metamask({ size, text }) {
                 rel="noreferrer"
                 className="no-underline"
               >
-                <div className="flex p-2 hover:text-cyan-400 text-blue-400">
+                <div className="flex p-2 hover:text-cyan-400 text-blue-800">
                   <ExploreIcon></ExploreIcon>
                   <span className=" font-Cairos mx-1">View on explorer</span>
                 </div>
@@ -163,7 +163,7 @@ export default function Metamask({ size, text }) {
             <Button
               size="large"
               variant="contained"
-              className="bg-cyan-400 w-full hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
+              className="bg-blue-800 w-full hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
               onClick={disconnect}
             >
               Disconnect

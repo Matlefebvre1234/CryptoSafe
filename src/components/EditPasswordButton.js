@@ -104,7 +104,7 @@ export default function EditPasswordButton({
           await decrypt();
           setOpen(true);
         }}
-        className=" bg-sky-400 w-full h-7 shadow shadow-gray-400 mr-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+        className=" bg-blue-800 w-full h-7 shadow shadow-gray-400 mr-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
       >
         <EditIcon className="text-lg"></EditIcon>
       </div>
@@ -146,8 +146,14 @@ export default function EditPasswordButton({
                 }}
                 label="Name"
                 className="my-2 font-Cairo"
-                InputProps={{ style: { fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"} }}
-                InputLabelProps = {{style: {fontSize: 13}}}
+                InputProps={{
+                  style: {
+                    fontSize: 15,
+                    borderRadius: 15,
+                    background: "#F6F6F6",
+                  },
+                }}
+                InputLabelProps={{ style: { fontSize: 13 } }}
               />
               <TextField
                 required
@@ -157,12 +163,17 @@ export default function EditPasswordButton({
                   modified.current = true;
                 }}
                 defaultValue={inputPassword.current}
-                
                 id="password"
                 label="Password"
                 className="my-2 font-Cairo"
-                InputProps={{ style: { fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"} }}
-                InputLabelProps = {{style: {fontSize: 13}}}
+                InputProps={{
+                  style: {
+                    fontSize: 15,
+                    borderRadius: 15,
+                    background: "#F6F6F6",
+                  },
+                }}
+                InputLabelProps={{ style: { fontSize: 13 } }}
               />
             </div>
           )}
@@ -172,7 +183,7 @@ export default function EditPasswordButton({
             <Button
               size="medium"
               variant="contained"
-              className="bg-cyan-400 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
+              className="bg-blue-800 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
               onClick={editPassword}
             >
               Save

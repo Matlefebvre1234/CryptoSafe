@@ -15,17 +15,14 @@ import { resetAccount } from "../helper/resetAccount";
 import CloseIcon from "@mui/icons-material/Close";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
 const theme = createTheme({
   palette: {
     test: {
       // Purple and green play nicely together.
-      main: '#4DE7ED',
+      main: "#4DE7ED",
     },
-},
+  },
 });
-
-
 
 export default function DoubleSecurityInput({
   hashDoubleSecurity,
@@ -75,34 +72,34 @@ export default function DoubleSecurityInput({
           Enter your DoubleSecurity Password{" "}
         </span>
         <ThemeProvider theme={theme}>
-        <TextField
-          required
-          color="test"
-          error={errorInput}
-          id="Password"
-          type="password"
-          onChange={(e) => {
-            input.current = e.target.value;
-          }}
-          label="Password"
-          size="small"
-          className="my-5 font-Cairo"
-          InputProps={{
-            style: { fontSize: 15, borderRadius: 15, background: "#F6F6F6" },
-          }}
-          InputLabelProps={{ style: { fontSize: 13 } }}
-        />
+          <TextField
+            required
+            color="test"
+            error={errorInput}
+            id="Password"
+            type="password"
+            onChange={(e) => {
+              input.current = e.target.value;
+            }}
+            label="Password"
+            size="small"
+            className="my-5 font-Cairo"
+            InputProps={{
+              style: { fontSize: 15, borderRadius: 15, background: "#F6F6F6" },
+            }}
+            InputLabelProps={{ style: { fontSize: 13 } }}
+          />
         </ThemeProvider>
-        
+
         <Button
           size="medium"
           variant="contained"
-          className="bg-cyan-400 hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
+          className="bg-blue-800 hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
           onClick={submit}
         >
           Confirm
         </Button>
-        <IconButton className=" text-cyan-400" onClick={() => setOpen(true)}>
+        <IconButton className=" bg-blue-800" onClick={() => setOpen(true)}>
           <HelpIcon></HelpIcon>
         </IconButton>
         <Dialog
@@ -139,7 +136,7 @@ export default function DoubleSecurityInput({
               <Button
                 size="medium"
                 variant="contained"
-                className="bg-cyan-400 hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
+                className="bg-blue-800 hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
                 onClick={() => setOpenConfirmation(true)}
               >
                 RESET ACCOUNT

@@ -50,7 +50,7 @@ export default function PasswordCard({
       className=" rounded-2xl flex items-end w-44 lg:mx-3 my-3 "
     >
       <CardContent className="px-5 pt-5 mb-1 rounded-2xl flex flex-col w-full">
-        <span className="font-Concert text-blue-400  text-center text-lg mb-3">
+        <span className="font-Concert text-blue-800  text-center text-lg mb-3">
           {password.name}
         </span>
         <div className="flex justify-center items-center w-full px-1">
@@ -65,7 +65,7 @@ export default function PasswordCard({
                 setVisibility((prev) => !prev);
                 if (!visibility) decrypt();
               }}
-              className=" bg-sky-400 w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+              className=" bg-blue-800 w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
             >
               {visibility ? (
                 <VisibilityOffIcon className="text-lg"></VisibilityOffIcon>
@@ -86,7 +86,7 @@ export default function PasswordCard({
           ></EditPasswordButton>
           <div
             onClick={() => deletePassword(password.id)}
-            className=" bg-sky-400 w-full h-7 shadow shadow-gray-400 ml-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+            className=" bg-blue-800 w-full h-7 shadow shadow-gray-400 ml-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
           >
             <DeleteIcon className="text-lg"></DeleteIcon>
           </div>

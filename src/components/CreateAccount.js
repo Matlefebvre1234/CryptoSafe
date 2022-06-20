@@ -31,7 +31,7 @@ export default function CreateAccount({ callback }) {
             <Button
               size="large"
               variant="contained"
-              className="bg-cyan-300 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
+              className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
               startIcon={<GroupAddIcon></GroupAddIcon>}
               onClick={createAccount}
             >

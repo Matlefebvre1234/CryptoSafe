@@ -21,9 +21,12 @@ export default function Setting({ open, setOpen, fetchPassword }) {
     <Drawer anchor={"right"} open={open} onClose={handleClose}>
       <List>
         <ListItem disablePadding className="my-2">
-          <ListItemButton className="font-Cairo" onClick={() => setOpenDoubleSecurity(true)}>
+          <ListItemButton
+            className="font-Cairo"
+            onClick={() => setOpenDoubleSecurity(true)}
+          >
             <ListItemIcon>
-              <LocalPoliceIcon className="text-cyan-400"></LocalPoliceIcon>
+              <LocalPoliceIcon className="text-blue-800"></LocalPoliceIcon>
             </ListItemIcon>
             Double security
           </ListItemButton>
@@ -34,9 +37,12 @@ export default function Setting({ open, setOpen, fetchPassword }) {
           ></DoubleSecurity>
         </ListItem>
         <ListItem disablePadding className="my-2">
-          <ListItemButton  className="font-Cairo" onClick={() => setOpenResetAccount(true)}>
+          <ListItemButton
+            className="font-Cairo"
+            onClick={() => setOpenResetAccount(true)}
+          >
             <ListItemIcon>
-              <RestartAltIcon className="text-cyan-400" ></RestartAltIcon>
+              <RestartAltIcon className="text-blue-800"></RestartAltIcon>
             </ListItemIcon>
             Reset Account
           </ListItemButton>

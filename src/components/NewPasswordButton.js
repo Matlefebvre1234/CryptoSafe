@@ -120,7 +120,7 @@ export default function NewPasswordButton({ callback, account }) {
           setOpen(true);
         }}
         variant="contained"
-        className="bg-sky-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+        className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
         startIcon={<AddIcon></AddIcon>}
       >
         New Password
@@ -156,7 +156,6 @@ export default function NewPasswordButton({ callback, account }) {
               <TextField
                 required
                 error={errorName}
-            
                 id="Name"
                 onChange={(e) => {
                   inputName.current = e.target.value;
@@ -164,8 +163,14 @@ export default function NewPasswordButton({ callback, account }) {
                 label="Name"
                 className="my-2 text-xs font-Cairo"
                 size="small"
-                InputProps={{ style: {fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"} }}
-                InputLabelProps = {{style: {fontSize: 13}}}
+                InputProps={{
+                  style: {
+                    fontSize: 15,
+                    borderRadius: 15,
+                    background: "#F6F6F6",
+                  },
+                }}
+                InputLabelProps={{ style: { fontSize: 13 } }}
               />
               <TextField
                 required
@@ -174,12 +179,17 @@ export default function NewPasswordButton({ callback, account }) {
                 onChange={(e) => {
                   inputPassword.current = e.target.value;
                 }}
-                
                 id="password"
                 label="Password"
                 className="my-2 font-Cairo"
-                InputProps={{ style: { fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"} }}
-                InputLabelProps = {{style: {fontSize: 13}}}
+                InputProps={{
+                  style: {
+                    fontSize: 15,
+                    borderRadius: 15,
+                    background: "#F6F6F6",
+                  },
+                }}
+                InputLabelProps={{ style: { fontSize: 13 } }}
               />
             </div>
           )}
@@ -189,7 +199,7 @@ export default function NewPasswordButton({ callback, account }) {
             <Button
               size="medium"
               variant="contained"
-              className="bg-cyan-400 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
+              className="bg-blue-800 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
               onClick={validInput}
             >
               create

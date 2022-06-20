@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <Paper elevation={4} className="">
-      <div className="flex lg:justify-around justify-between px- p-5 items-center">
+      <div className="flex lg:justify-around justify-between px- p-5 items-center bg-blue-900">
         <div className="flex justify-center items-center">
           <NeptuneLogo className="2xlg:w-32 2xlg:h-32 xlg:w-24 xlg:h-24 w-20 h-20 hover:transform hover:scale-110"></NeptuneLogo>
           <span className=" text-xl 2xlg:text-4xl lg:text-2xl text-cyan-300  font-Concert hover:text-blue-400 hover:transform hover:scale-105 antialiased">
@@ -68,19 +68,19 @@ export default function Header() {
           <div className="flex justify-around mx-2">
             <Link
               to="/"
-              className="mx-2 font-Cairo text-black  antialiased 2xl:text-xl  no-underline hover:text-cyan-400 hover:transform hover:scale-105  "
+              className="mx-2 font-Cairo text-white  antialiased 2xl:text-xl  no-underline hover:text-cyan-400 hover:transform hover:scale-105  "
             >
               Dashboard
             </Link>
             <Link
               to="/"
-              className="mx-2 font-Cairo text-black antialiased 2xl:text-xl   no-underline hover:text-cyan-400 hover:transform hover:scale-105  "
+              className="mx-2 font-Cairo text-white antialiased 2xl:text-xl   no-underline hover:text-cyan-400 hover:transform hover:scale-105  "
             >
               Pricing
             </Link>
             <Link
               to="/"
-              className="mx-2 font-Cairo text-black antialiased 2xl:text-xl  no-underline hover:text-cyan-400 hover:transform hover:scale-105 hover: "
+              className="mx-2 font-Cairo text-white antialiased 2xl:text-xl  no-underline hover:text-cyan-400 hover:transform hover:scale-105 hover: "
             >
               Contact us
             </Link>
