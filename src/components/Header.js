@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import Metamask from "./Metamask";
 import { Drawer, List, ListItem, ListItemButton } from "@mui/material";
 import { ReactComponent as NeptuneLogo } from "../images/NeptuneLogo.svg";
+
 export default function Header() {
   const [openMenu, setOpenMenu] = useState();
 
@@ -12,7 +13,7 @@ export default function Header() {
     <Paper elevation={4} className="">
       <div className="flex lg:justify-around justify-between px- p-5 items-center bg-blue-900">
         <div className="flex justify-center items-center">
-          <NeptuneLogo className="2xlg:w-32 2xlg:h-32 xlg:w-24 xlg:h-24 w-20 h-20 hover:transform hover:scale-110"></NeptuneLogo>
+          <NeptuneLogo className="2xl:w-32 2xl:h-32 xl:w-24 xl:h-24 w-20 h-20 hover:transform hover:scale-110"></NeptuneLogo>
           <span className=" text-xl 2xlg:text-4xl lg:text-2xl text-cyan-300  font-Concert hover:text-blue-400 hover:transform hover:scale-105 antialiased">
             Neptune
           </span>
