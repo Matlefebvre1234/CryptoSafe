@@ -7,12 +7,15 @@ import {
   TextField,
   Button,
   IconButton,
+  InputAdornment,
 } from "@mui/material";
 import web3Context from "../../Context/web3Context";
 import passwordManagerContext from "../../Context/PasswordManagerContext";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { resetAccount } from "../../helper/resetAccount";
 import CloseIcon from "@mui/icons-material/Close";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
   const [loading, setLoading] = useState();
   const [created, setCreated] = useState(false);
@@ -20,7 +23,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
   const inputPassword = useRef();
   const web3 = useContext(web3Context);
   const passwordManager = useContext(passwordManagerContext);
-
+  const [passwordVisibility,setPasswordVisibility] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   function handleClose() {
     setLoading(false);
@@ -153,8 +156,9 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
                 }}
                 id="password"
                 label="Password"
+                type={passwordVisibility ? 'text' : 'password'}
                 className="my-2 font-Cairo"
-                InputProps={{ style: { fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"} }}
+                InputProps={{ style: { fontSize: 15, borderRadius: 15 ,background: "#F6F6F6"},   endAdornment: <InputAdornment position="end"><IconButton onClick={() =>{setPasswordVisibility(prev => !prev)}}>{passwordVisibility ? <VisibilityOff></VisibilityOff> : <Visibility></Visibility>}</IconButton></InputAdornment>}}
                 InputLabelProps = {{style: {fontSize: 13}}}
               />
             </div>

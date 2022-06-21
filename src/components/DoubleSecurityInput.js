@@ -6,8 +6,11 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  InputAdornment,
 } from "@mui/material";
 import { ethers } from "ethers";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import passwordManagerContext from "../Context/PasswordManagerContext";
 import web3Context from "../Context/web3Context";
 import HelpIcon from "@mui/icons-material/Help";
@@ -27,9 +30,11 @@ const theme = createTheme({
 export default function DoubleSecurityInput({
   hashDoubleSecurity,
   setHashDoubleSecurity,
+  setStateDoubleSecurity
 }) {
   const [errorInput, setErrorInput] = useState(false);
   const [open, setOpen] = useState(false);
+  const [visibility,setVisibility] = useState(false);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const web3 = useContext(web3Context);
   const passwordContext = useContext(passwordManagerContext);
@@ -52,11 +57,11 @@ export default function DoubleSecurityInput({
 
       let hash = ethers.utils.id(web3.ref_address.current + input.current);
       const wallet = new ethers.Wallet(hash);
-      console.log("hashDoubleSecurity", hashDoubleSecurity);
-      console.log("wallet", wallet.address);
       if (hashDoubleSecurity === wallet.address) {
         passwordContext.ref_doubleSecurity.current = input.current;
-        setHashDoubleSecurity(null);
+        setStateDoubleSecurity(input.current);
+        console.log(hashDoubleSecurity)
+     
       } else {
         alert("wrong Password");
       }
@@ -75,16 +80,17 @@ export default function DoubleSecurityInput({
           <TextField
             required
             autoFocus={true}
+            
             color="test"
             error={errorInput}
             id="Password"
-            type="password"
+            type={visibility ? 'text' : "password"}
             onChange={(e) => {
               input.current = e.target.value;
             }}
             label="Password"
             size="small"
-            className="my-5 font-Cairo"
+            className="my-5 font-Cairo w-48"
             onKeyDown={(event)=>{
               if(event.key === 'Enter')
               {
@@ -92,8 +98,8 @@ export default function DoubleSecurityInput({
               }
             }}
             InputProps={{
-              style: { fontSize: 15, borderRadius: 15, background: "#F6F6F6" },
-            }}
+              style: { fontSize: 15, borderRadius: 15, background: "#F6F6F6", paddingRight: 0 },
+            endAdornment: <InputAdornment position="end"><IconButton onClick={() =>{setVisibility(prev => !prev)}}>{visibility ? <VisibilityOff></VisibilityOff> : <Visibility></Visibility>}</IconButton></InputAdornment>}}
             InputLabelProps={{ style: { fontSize: 13 } }}
           />
         </ThemeProvider>

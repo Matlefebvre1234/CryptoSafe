@@ -10,7 +10,8 @@ import {
   IconButton,
   Snackbar,
   Alert,
-  Grow
+  Grow,
+  InputAdornment,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
@@ -21,6 +22,8 @@ import abiMaster from "../abi/Master.json";
 import { encryptWithFakeAddress } from "../helper/encrypt";
 import contractAddress from "../abi/contractAddress";
 import passwordManagerContext from "../Context/PasswordManagerContext";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export default function NewPasswordButton({ callback, account }) {
   const [openSnakBar, setOpenSnackBar] = useState(false);
   const [open, setOpen] = useState(false);
@@ -36,7 +39,7 @@ export default function NewPasswordButton({ callback, account }) {
   const inputName = useRef("");
   const inputPassword = useRef("");
   const inputUsername = useRef("");
-
+  const [passwordVisibility,setVisibility] = useState(false);
   function validInput() {
     let valid = true;
 
@@ -225,7 +228,7 @@ export default function NewPasswordButton({ callback, account }) {
                   inputName.current = e.target.value;
                 }}
                 label="Name"
-                className="my-2 text-xs font-Cairo"
+                className="my-2 text-xs font-Cairo w-44"
                 size="small"
                 InputProps={{
                   style: {
@@ -250,7 +253,7 @@ export default function NewPasswordButton({ callback, account }) {
                 }}}
                 id="username"
                 label="Username"
-                className="my-2 font-Cairo"
+                className="my-2 font-Cairo w-44"
                 InputProps={{
                   style: {
                     fontSize: 15,
@@ -272,15 +275,17 @@ export default function NewPasswordButton({ callback, account }) {
                 onChange={(e) => {
                   inputPassword.current = e.target.value;
                 }}
+                type={passwordVisibility ? 'text' : 'password'}
                 id="password"
                 label="Password"
-                className="my-2 font-Cairo"
+                className="my-2 font-Cairo w-44"
                 InputProps={{
                   style: {
                     fontSize: 15,
                     borderRadius: 15,
                     background: "#F6F6F6",
-                  },
+                    paddingRight: 0
+                  },  endAdornment: <InputAdornment position="end"><IconButton onClick={() =>{setVisibility(prev => !prev)}}>{passwordVisibility ? <VisibilityOff></VisibilityOff> : <Visibility></Visibility>}</IconButton></InputAdornment>
                 }}
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
