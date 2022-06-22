@@ -10,7 +10,7 @@ import {
   IconButton,
   Snackbar,
   Alert,
-  Grow
+  Grow,
 } from "@mui/material";
 import web3Context from "../Context/web3Context";
 import { CircularProgress } from "@mui/material";
@@ -38,8 +38,8 @@ export default function EditPasswordButton({
   const [errorName, setErrorName] = useState(false);
   const [errorUsername, setErrorUsername] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
-  const fieldUsername  = useRef();
-  const fieldPassword  = useRef();
+  const fieldUsername = useRef();
+  const fieldPassword = useRef();
   async function decrypt() {
     if (decrypted.username === "" || decrypted.password === "") {
       let lastDecryptionPassword;
@@ -169,7 +169,7 @@ export default function EditPasswordButton({
     } else {
       setErrorName(false);
     }
-    
+
     if (inputPassword.current === "") {
       setErrorPassword(true);
       valid = false;
@@ -195,7 +195,7 @@ export default function EditPasswordButton({
           await decrypt();
           setOpen(true);
         }}
-        className=" bg-blue-800 w-full h-7 shadow shadow-gray-400 mr-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+        className=" bg-bleuMarin w-full h-7 shadow shadow-gray-400 mr-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
       >
         <EditIcon className="text-lg"></EditIcon>
       </div>
@@ -232,9 +232,8 @@ export default function EditPasswordButton({
                 size="small"
                 id="Name"
                 defaultValue={password.name}
-                onKeyDown={(e) =>{
-                  if(e.key === 'Enter')
-                  {
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
                     fieldUsername.current.focus();
                   }
                 }}
@@ -263,9 +262,8 @@ export default function EditPasswordButton({
                   inputUsername.current = e.target.value;
                   modified.current = true;
                 }}
-                onKeyDown={(e) =>{
-                  if(e.key === 'Enter')
-                  {
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
                     fieldPassword.current.focus();
                   }
                 }}
@@ -288,9 +286,8 @@ export default function EditPasswordButton({
                 size="small"
                 inputRef={fieldPassword}
                 error={errorPassword}
-                onKeyDown={(e) =>{
-                  if(e.key === 'Enter')
-                  {
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
                     validInput();
                   }
                 }}
@@ -319,7 +316,7 @@ export default function EditPasswordButton({
             <Button
               size="medium"
               variant="contained"
-              className="bg-blue-800 hover:bg-blue-500  font-Concert hover:transform hover:scale-105"
+              className="bg-bleuMarin hover:bg-blue-500  font-Neptune hover:transform hover:scale-105"
               onClick={validInput}
             >
               Save
@@ -327,7 +324,14 @@ export default function EditPasswordButton({
           )}
         </DialogActions>
       </Dialog>
-      <Snackbar open={openSnakBar}  autoHideDuration={3000} onClose={() =>{setOpenSnackBar(false)}} TransitionComponent={Grow}>
+      <Snackbar
+        open={openSnakBar}
+        autoHideDuration={3000}
+        onClose={() => {
+          setOpenSnackBar(false);
+        }}
+        TransitionComponent={Grow}
+      >
         <Alert
           variant="filled"
           onClose={handleCloseSnackBar}

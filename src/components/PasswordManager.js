@@ -66,12 +66,11 @@ export default function PasswordManager({
           <Card className="p-5 flex-col justify-center items-center bg-neutral-100 ">
             <div className="flex lg:flex-row flex-col justify-center items-center">
               <span className="font-Concert text-black text-xs lg:text-left text-center lg:text-sm w-48 mx-2 my-2">
-               
                 Your Contract Account :
               </span>
               <Tooltip
                 title="Copy"
-                className= "hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
+                className="hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
                 arrow
                 placement="top"
                 TransitionComponent={Zoom}
@@ -96,7 +95,7 @@ export default function PasswordManager({
                 <Button
                   size="small"
                   variant="contained"
-                  className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+                  className="bg-bleuMarin hover:bg-blue-500 mx-2  font-Neptune hover:transform hover:scale-105 font-Cairos text-xs"
                   startIcon={<ExploreIcon></ExploreIcon>}
                 >
                   Explorer
@@ -105,13 +104,12 @@ export default function PasswordManager({
             </div>
             <div className="flex lg:flex-row mt-2 flex-col justify-center items-center">
               <span className="font-Concert text-black text-xs lg:text-left text-center lg:text-sm w-48 mx-2 my-2">
-         
                 Your Storage Account :
               </span>
               <Tooltip
                 title="Copy"
                 arrow
-                className= "hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
+                className="hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
                 placement="top"
                 TransitionComponent={Zoom}
               >
@@ -135,7 +133,7 @@ export default function PasswordManager({
                 <Button
                   size="small"
                   variant="contained"
-                  className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+                  className="bg-bleuMarin hover:bg-blue-500 mx-2  font-Neptune hover:transform hover:scale-105 font-Cairos text-xs"
                   startIcon={<ExploreIcon></ExploreIcon>}
                 >
                   Explorer
@@ -157,7 +155,7 @@ export default function PasswordManager({
                 setOpenSetting(true);
               }}
               variant="contained"
-              className="bg-blue-800 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+              className="bg-bleuMarin hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
               startIcon={<SettingsIcon></SettingsIcon>}
             >
               Settings

@@ -105,9 +105,9 @@ export default function PasswordCard({
                 open={tooltipUsername}
                 title="Copy"
                 className={
-                  (visibility &&
-                  decrypted ) ?
-                  "hover:text-cyan-400 transform hover:scale-105 cursor-pointer" : ''
+                  visibility && decrypted
+                    ? "hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
+                    : ""
                 }
                 onClose={() => {
                   setTooltipsUsername(false);
@@ -145,7 +145,7 @@ export default function PasswordCard({
                   )
                     setVisibility((prev) => !prev);
                 }}
-                className=" bg-blue-800 w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+                className=" bg-bleuMarin w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
               >
                 {visibility ? (
                   <VisibilityOffIcon className="text-lg"></VisibilityOffIcon>
@@ -160,9 +160,9 @@ export default function PasswordCard({
               open={tooltipPassword}
               title="Copy"
               className={
-                (visibility &&
-                decrypted) ?
-                "hover:text-cyan-400 transform hover:scale-105 cursor-pointer": ''
+                visibility && decrypted
+                  ? "hover:text-cyan-400 transform hover:scale-105 cursor-pointer"
+                  : ""
               }
               onClose={() => {
                 setTooltipsPassword(false);
@@ -199,7 +199,7 @@ export default function PasswordCard({
             ></EditPasswordButton>
             <div
               onClick={() => deletePassword(password.id)}
-              className=" bg-blue-800 w-full h-7 shadow shadow-gray-400 ml-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+              className=" bg-bleuMarin w-full h-7 shadow shadow-gray-400 ml-1  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
             >
               <DeleteIcon className="text-lg"></DeleteIcon>
             </div>

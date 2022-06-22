@@ -9,8 +9,8 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { ethers } from "ethers";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import passwordManagerContext from "../Context/PasswordManagerContext";
 import web3Context from "../Context/web3Context";
 import HelpIcon from "@mui/icons-material/Help";
@@ -30,11 +30,11 @@ const theme = createTheme({
 export default function DoubleSecurityInput({
   hashDoubleSecurity,
   setHashDoubleSecurity,
-  setStateDoubleSecurity
+  setStateDoubleSecurity,
 }) {
   const [errorInput, setErrorInput] = useState(false);
   const [open, setOpen] = useState(false);
-  const [visibility,setVisibility] = useState(false);
+  const [visibility, setVisibility] = useState(false);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const web3 = useContext(web3Context);
   const passwordContext = useContext(passwordManagerContext);
@@ -60,8 +60,7 @@ export default function DoubleSecurityInput({
       if (hashDoubleSecurity === wallet.address) {
         passwordContext.ref_doubleSecurity.current = input.current;
         setStateDoubleSecurity(input.current);
-        console.log(hashDoubleSecurity)
-     
+        console.log(hashDoubleSecurity);
       } else {
         alert("wrong Password");
       }
@@ -80,26 +79,44 @@ export default function DoubleSecurityInput({
           <TextField
             required
             autoFocus={true}
-            
             color="test"
             error={errorInput}
             id="Password"
-            type={visibility ? 'text' : "password"}
+            type={visibility ? "text" : "password"}
             onChange={(e) => {
               input.current = e.target.value;
             }}
             label="Password"
             size="small"
             className="my-5 font-Cairo w-48"
-            onKeyDown={(event)=>{
-              if(event.key === 'Enter')
-              {
-                submit()
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                submit();
               }
             }}
             InputProps={{
-              style: { fontSize: 15, borderRadius: 15, background: "#F6F6F6", paddingRight: 0 },
-            endAdornment: <InputAdornment position="end"><IconButton onClick={() =>{setVisibility(prev => !prev)}}>{visibility ? <VisibilityOff></VisibilityOff> : <Visibility></Visibility>}</IconButton></InputAdornment>}}
+              style: {
+                fontSize: 15,
+                borderRadius: 15,
+                background: "#F6F6F6",
+                paddingRight: 0,
+              },
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => {
+                      setVisibility((prev) => !prev);
+                    }}
+                  >
+                    {visibility ? (
+                      <VisibilityOff></VisibilityOff>
+                    ) : (
+                      <Visibility></Visibility>
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             InputLabelProps={{ style: { fontSize: 13 } }}
           />
         </ThemeProvider>
@@ -107,12 +124,12 @@ export default function DoubleSecurityInput({
         <Button
           size="medium"
           variant="contained"
-          className="bg-blue-800 hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
+          className="bg-bleuMarin hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
           onClick={submit}
         >
           Confirm
         </Button>
-        <IconButton className=" text-blue-800" onClick={() => setOpen(true)}>
+        <IconButton className=" text-bleuMarin" onClick={() => setOpen(true)}>
           <HelpIcon></HelpIcon>
         </IconButton>
         <Dialog

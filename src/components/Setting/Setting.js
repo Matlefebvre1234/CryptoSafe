@@ -26,7 +26,7 @@ export default function Setting({ open, setOpen, fetchPassword }) {
             onClick={() => setOpenDoubleSecurity(true)}
           >
             <ListItemIcon>
-              <LocalPoliceIcon className="text-blue-800"></LocalPoliceIcon>
+              <LocalPoliceIcon className="text-bleuMarin"></LocalPoliceIcon>
             </ListItemIcon>
             Double security
           </ListItemButton>
@@ -42,7 +42,7 @@ export default function Setting({ open, setOpen, fetchPassword }) {
             onClick={() => setOpenResetAccount(true)}
           >
             <ListItemIcon>
-              <RestartAltIcon className="text-blue-800"></RestartAltIcon>
+              <RestartAltIcon className="text-bleuMarin"></RestartAltIcon>
             </ListItemIcon>
             Reset Account
           </ListItemButton>

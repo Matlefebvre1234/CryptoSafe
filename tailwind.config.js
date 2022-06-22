@@ -4,12 +4,14 @@ module.exports = {
   },
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    
     extend: {
-   
+      colors: {
+        bleuMarin: "#06184a",
+      },
       fontFamily: {
         Concert: " 'Titan One', cursive",
         Cairo: "'Cairo', sans-serif",
+        Neptune: "'Neptune'",
       },
     },
   },

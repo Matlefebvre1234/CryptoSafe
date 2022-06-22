@@ -117,7 +117,7 @@ export default function Metamask({ size, text }) {
       <Button
         size={size}
         variant="contained"
-        className="bg-cyan-400 hover:bg-blue-500 mx-2 font-Concert hover:transform hover:scale-105"
+        className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Neptune hover:transform hover:scale-105"
         startIcon={<AccountBalanceWalletIcon></AccountBalanceWalletIcon>}
         onClick={web3.state_address ? handleClickOpen : Connect}
       >
@@ -158,7 +158,6 @@ export default function Metamask({ size, text }) {
                 placement="top"
                 TransitionComponent={Zoom}
               >
-                
                 <span
                   onClick={() => {
                     setOpenSnackBar(true);
