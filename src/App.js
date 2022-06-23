@@ -4,7 +4,7 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import web3Context from "./Context/web3Context";
 import { useRef, useState } from "react";
 import Dashboard from "./pages/Dashboard";
-
+import Home from "./pages/Home"
 function App() {
   const ref_address = useRef();
   const ref_connected = useRef();
@@ -44,7 +44,8 @@ function App() {
       <web3Context.Provider value={web3state}>
         <Router>
           <Routes>
-            <Route path="/" element={<Dashboard></Dashboard>} />
+           <Route path="/" element={<Home></Home>} />
+           <Route path="/Dashboard" element={<Dashboard></Dashboard>} />
           </Routes>
         </Router>
       </web3Context.Provider>
