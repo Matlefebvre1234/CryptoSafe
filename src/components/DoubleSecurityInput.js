@@ -124,12 +124,12 @@ export default function DoubleSecurityInput({
         <Button
           size="medium"
           variant="contained"
-          className="bg-bleuMarin hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
+          className="bg-bleuMarin hover:bg-blue-500 m-2  font-Neptune hover:transform hover:scale-105"
           onClick={submit}
         >
           Confirm
         </Button>
-        <IconButton className=" text-bleuMarin" onClick={() => setOpen(true)}>
+        <IconButton className=" text-cyan-400" onClick={() => setOpen(true)}>
           <HelpIcon></HelpIcon>
         </IconButton>
         <Dialog
@@ -137,7 +137,7 @@ export default function DoubleSecurityInput({
           onClose={handleClose}
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle className="font-Cairo text-gray-400 ">
+          <DialogTitle className="font-Neptune text-sm text-gray-400 ">
             Help
             <IconButton
               aria-label="close"
@@ -166,7 +166,7 @@ export default function DoubleSecurityInput({
               <Button
                 size="medium"
                 variant="contained"
-                className="bg-blue-800 hover:bg-blue-500 m-2  font-Concert hover:transform hover:scale-105"
+                className="bg-blue-800 hover:bg-blue-500 m-2  font-Neptune hover:transform hover:scale-105"
                 onClick={() => setOpenConfirmation(true)}
               >
                 RESET ACCOUNT
@@ -179,7 +179,7 @@ export default function DoubleSecurityInput({
           onClose={handleClose}
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle className="font-Cairo text-gray-400 ">
+          <DialogTitle className="font-Neptune text-sm text-gray-400 ">
             Reset Account
             <IconButton
               aria-label="close"
@@ -204,7 +204,7 @@ export default function DoubleSecurityInput({
               <Button
                 size="medium"
                 variant="contained"
-                className="bg-red-500  font-Concert hover:transform hover:scale-105"
+                className="bg-red-500  font-Neptune hover:transform hover:scale-105"
                 onClick={resetAccountUser}
               >
                 RESET ACCOUNT

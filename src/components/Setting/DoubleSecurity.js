@@ -62,7 +62,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle className="font-Cairo text-gray-400 p-5 ">
+      <DialogTitle className="font-Neptune text-sm text-gray-400 p-5 ">
         Double Security
         {!loading && (
           <IconButton
@@ -96,7 +96,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
             <Button
               size="medium"
               variant="contained"
-              className="bg-red-500 hover:bg-red-400 mx-2 w-3/4   font-Concert hover:transform hover:scale-105"
+              className="bg-red-500 hover:bg-red-400 mx-2 w-3/4   font-Neptune hover:transform hover:scale-105"
               onClick={() => setOpenConfirmation(true)}
             >
               I understand and wish to continue
@@ -115,7 +115,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
         }
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle className="font-Cairo text-gray-400 p-5 ">
+        <DialogTitle className="font-Neptune text-sm text-gray-400 p-5 ">
           Double Security
           {!loading && (
             <IconButton
@@ -176,7 +176,7 @@ export default function DoubleSecurity({ open, setOpen, fetchPassword }) {
             <Button
               size="medium"
               variant="contained"
-              className="bg-red-500 hover:bg-red-400 m-2 w-3/4  font-Concert hover:transform hover:scale-105"
+              className="bg-red-500 hover:bg-red-400 m-2 w-3/4  font-Neptune hover:transform hover:scale-105"
               onClick={validInput}
             >
               Activate Double Security

@@ -95,7 +95,7 @@ export default function PasswordManager({
                 <Button
                   size="small"
                   variant="contained"
-                  className="bg-bleuMarin hover:bg-blue-500 mx-2  font-Neptune hover:transform hover:scale-105 font-Cairos text-xs"
+                  className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
                   startIcon={<ExploreIcon></ExploreIcon>}
                 >
                   Explorer
@@ -133,7 +133,7 @@ export default function PasswordManager({
                 <Button
                   size="small"
                   variant="contained"
-                  className="bg-bleuMarin hover:bg-blue-500 mx-2  font-Neptune hover:transform hover:scale-105 font-Cairos text-xs"
+                  className="bg-cyan-400 hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
                   startIcon={<ExploreIcon></ExploreIcon>}
                 >
                   Explorer
@@ -155,7 +155,7 @@ export default function PasswordManager({
                 setOpenSetting(true);
               }}
               variant="contained"
-              className="bg-bleuMarin hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105 font-Cairos text-xs"
+              className="bg-bleuMarin hover:bg-blue-500 mx-2  font-Neptune hover:transform hover:scale-105 font-Cairos text-xs"
               startIcon={<SettingsIcon></SettingsIcon>}
             >
               Settings

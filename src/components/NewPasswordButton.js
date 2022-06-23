@@ -190,7 +190,7 @@ export default function NewPasswordButton({ callback, account }) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle className="font-Cairo text-gray-400 p-5 ">
+        <DialogTitle className="font-Neptune text-sm text-gray-400 p-5 ">
           New Password
           {!loading && (
             <IconButton

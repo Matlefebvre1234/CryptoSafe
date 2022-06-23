@@ -177,7 +177,7 @@ export default function Metamask({ size, text }) {
                 rel="noreferrer"
                 className="no-underline"
               >
-                <div className="flex p-2 hover:text-cyan-400 text-blue-800">
+                <div className="flex p-2 hover:text-blue-400 text-cyan-400">
                   <ExploreIcon></ExploreIcon>
                   <span className=" font-Cairos mx-1">View on explorer</span>
                 </div>
@@ -188,7 +188,7 @@ export default function Metamask({ size, text }) {
             <Button
               size="large"
               variant="contained"
-              className="bg-blue-800 w-full hover:bg-blue-500 mx-2  font-Concert hover:transform hover:scale-105"
+              className="bg-bleuMarin w-full hover:bg-blue-500 mx-2  font-Neptune hover:transform hover:scale-105"
               onClick={disconnect}
             >
               Disconnect

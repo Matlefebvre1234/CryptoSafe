@@ -207,7 +207,7 @@ export default function CreateAccount({
             <Button
               size="medium"
               variant="contained"
-              className="bg-bleuMarin hover:bg-blue-400 m-2 w-3/4  font-Concert hover:transform hover:scale-105"
+              className="bg-bleuMarin hover:bg-blue-400 m-2 w-3/4  font-Neptune hover:transform hover:scale-105"
               onClick={validInput}
             >
               Create Account

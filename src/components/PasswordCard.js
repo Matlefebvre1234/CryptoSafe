@@ -145,7 +145,7 @@ export default function PasswordCard({
                   )
                     setVisibility((prev) => !prev);
                 }}
-                className=" bg-bleuMarin w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
+                className=" bg-cyan-400 w-7 h-7 shadow shadow-gray-400  flex justify-center items-center rounded-lg hover:bg-blue-500  text-white hover:transform hover:scale-105"
               >
                 {visibility ? (
                   <VisibilityOffIcon className="text-lg"></VisibilityOffIcon>

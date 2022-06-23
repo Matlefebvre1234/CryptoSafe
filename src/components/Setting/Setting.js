@@ -42,7 +42,7 @@ export default function Setting({ open, setOpen, fetchPassword }) {
             onClick={() => setOpenResetAccount(true)}
           >
             <ListItemIcon>
-              <RestartAltIcon className="text-bleuMarin"></RestartAltIcon>
+              <RestartAltIcon className="text-cyan-400"></RestartAltIcon>
             </ListItemIcon>
             Reset Account
           </ListItemButton>

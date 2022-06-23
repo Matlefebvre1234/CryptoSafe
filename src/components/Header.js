@@ -13,8 +13,12 @@ export default function Header() {
     <Paper elevation={4} className="">
       <div className="flex lg:justify-around justify-between px- p-5 items-center bg-bleuMarin">
         <div className="flex justify-center items-center">
+
+          <Link className="no-underline" to="/">
           <NeptuneLogo className="2xl:w-32 2xl:h-32 xl:w-24 xl:h-24 w-20 h-20 hover:transform hover:scale-110"></NeptuneLogo>
-          <NeptuneLogoText className="lg:w-60 lg:h-28 w-40 h-20 hover:transform hover:scale-110"></NeptuneLogoText>
+          <NeptuneLogoText className="2xl:w-60 2xl:h-28 w-40 h-20 hover:transform hover:scale-110"></NeptuneLogoText>
+          </Link>
+       
         </div>
 
         <MenuIcon
@@ -32,7 +36,7 @@ export default function Header() {
               <ListItem disablePadding className="my-2">
                 <ListItemButton>
                   <Link
-                    to="/"
+                    to="/Dashboard"
                     className=" font-Cairo text-black  flex justify-end w-full antialiased  no-underline hover:text-cyan-400 hover:transform hover:scale-105  "
                   >
                     Dashboard
@@ -42,7 +46,7 @@ export default function Header() {
               <ListItem disablePadding className="my-2">
                 <ListItemButton>
                   <Link
-                    to="/allo"
+                    to="/Dashboard"
                     className=" font-Cairo text-black flex justify-end w-full antialiased  no-underline hover:text-cyan-400 hover:transform hover:scale-105  "
                   >
                     Pricing
@@ -66,7 +70,7 @@ export default function Header() {
         <div className="lg:flex justify-center items-center hidden">
           <div className="flex justify-around mx-2">
             <Link
-              to="/"
+              to="Dashboard"
               className="mx-2 font-Neptune text-white  antialiased 2xl:text-lg  no-underline hover:text-cyan-400 hover:transform hover:scale-105  "
             >
               Dashboard
