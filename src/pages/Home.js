@@ -1,15 +1,18 @@
 import { Button } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import Subscibe from "../components/Subscibe";
 export default function Home() {
 
   return (
     <div>
       <Header></Header>
-
-      <div className="flex justify-center item-center w-screen">
-        <Link to="/Dashboard" className="no-underline flex items-center justify-center h-auto">
+      <div className="flex justify-center items-center flex-col w-full h-screen">
+      <div className="flex flex-col justify-center items-center w-full h-1/2">
+       <span className="text-7xl text-black font-Cairo text-center mb-2">Only you can access your passwords.</span>
+       <span className="text-4xl text-black font-Cairo text-center my-5"> First Decentralize Password Manager.</span>
+       <Link to="/Dashboard" className="no-underline flex items-center justify-center h-auto">
           <Button
             size="medium"
             variant="contained"
@@ -17,11 +20,13 @@ export default function Home() {
           >
             Launch App
           </Button>
-        
-     
         </Link>
-        <div class="ml-embedded" data-form="OkliBK"></div>
       </div>
+      </div>
+     
+      
+
+        <Subscibe></Subscibe>
     </div>
   );
 }
