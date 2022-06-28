@@ -7,7 +7,7 @@ import { ReactComponent as NeptuneLogo } from "../images/NeptuneLogo.svg";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 export default function Home() {
   return (
-    <div>
+    <div className="h-screen">
       <Header></Header>
       <div className="flex justify-center bg-black items-center flex-col w-full h-[650px] mb-14">
         <div className="flex flex-col justify-center items-center w-full h-1/2">
