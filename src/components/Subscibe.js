@@ -32,6 +32,7 @@ export default function Subscibe() {
     
   return (
     <div>
+      <p className='text-center text-white font-Neptune text-2xl my-5'> Don't mist importants updates and alerts <br></br> about the plateform ! </p>
 <div className='flex flex-col xl:flex-row justify-center items-center'>
 <TextField
                 required
@@ -42,14 +43,14 @@ export default function Subscibe() {
                 onChange={(e) => {
                   inputEmail.current = e.target.value;
                 }}
-                label="Name"
-                className="my-2 text-xs font-Cairo w-60 "
+                label="Email"
+                className="my-2 text-xs font-Cairo w-80 "
                 size="small"
                 InputProps={{
                   style: {
                     fontSize: 15,
                     borderRadius: 15,
-                    background: "#F6F6F6",
+                    background: "#FFFFFF",
                   },
                 }}
                 InputLabelProps={{ style: { fontSize: 13 } }}
@@ -57,7 +58,7 @@ export default function Subscibe() {
              <Button
               size="medium"
               variant="contained"
-              className="bg-bleuMarin hover:bg-blue-500 xl:mx-2 font-Neptune hover:transform hover:scale-105"
+              className="bg-cyan-400 hover:bg-blue-500 xl:mx-2 font-Neptune hover:transform hover:scale-105"
               onClick={validInput}
             >
               Subscribe
